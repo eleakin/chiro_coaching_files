@@ -4,25 +4,28 @@ Scrape the Chiropractic Physicians' Board of Nevada public licensee register
 (Thentia Cloud portal) into a CSV compatible with nv-chiropractor-list.csv.
 
 Run on your own machine:            python3 pull_nv_board.py
-If the default endpoint 404s:       python3 pull_nv_board.py --probe
-Then follow the instructions probe prints.
+To test the endpoint first:         python3 pull_nv_board.py --probe
 
-Why this works: the register page at
-  https://nvcpbn.portalus.thentiacloud.net/webs/portal/register/#/
-is a JavaScript app. The data it displays comes from a public JSON API on the
-same host (the standard Thentia pattern used by licensing boards nationwide):
-  /rest/public/profile/search/?keyword=all&skip=0&take=20&lang=en
-This script pages through that API and flattens the results.
+The register page (https://nvcpbn.portalus.thentiacloud.net/webs/portal/
+register/#/) is a JavaScript app backed by a public JSON API. Captured from
+the page's own network traffic, the real search request is:
+  /rest/public/profile/search/?keyword=smith&skip=0&take=20&lang=en-us
+    &licenseType=Chiropractic%20Physician&licenseStatus=Active
+    &disciplined=false
+The licenseType/licenseStatus/disciplined filters are REQUIRED — without them
+the API answers with an empty result set. Responses arrive as
+{result: {dataResults: [[...], ...], columnLayout: [...]}} with positional
+rows aligned to columnLayout.
 
 This is public record data — NRS 634 requires the Board's roster to be open to
-public inspection. Be polite anyway: the script rate-limits between pages.
+public inspection. Be polite anyway: the script rate-limits requests.
 
 Output:
-  nv-board-licensees.csv  — one row per licensee, template-compatible columns
-  nv-board-raw.json       — raw API records, so nothing is lost if the Board's
-                            field names don't match the mapping below
+  nv-board-licensees.csv  — one row per licensee
+  nv-board-raw.json       — raw API records, in case field mapping ever drifts
 """
 import urllib.request
+import urllib.parse
 import json
 import csv
 import time
@@ -31,8 +34,15 @@ import sys
 BASE = "https://nvcpbn.portalus.thentiacloud.net"
 SEARCH = BASE + "/rest/public/profile/search/"
 PAGE_SIZE = 100
+LICENSE_TYPE = "Chiropractic Physician"
+
+# "Active" is confirmed live from the page. The others are common Thentia
+# status values tried opportunistically — a wrong guess just returns 0 rows.
+STATUSES = ["Active", "Inactive", "Expired", "Suspended", "Revoked",
+            "Delinquent", "Retired"]
+
 HEADERS = {
-    # A normal browser UA — some WAFs reject default urllib
+    # a normal browser UA — the portal's firewall rejects bare clients
     "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                    "AppleWebKit/537.36 (KHTML, like Gecko) "
                    "Chrome/126.0 Safari/537.36"),
@@ -40,33 +50,26 @@ HEADERS = {
     "Referer": BASE + "/webs/portal/register/",
 }
 
-# Thentia field names vary slightly per board; every observed variant is listed.
-# The REGISTER_PROFILE_LABEL_* names are Nevada's columnLayout labels, applied
-# when the API returns positional rows (see extract_batch).
+# Nevada returns positional rows keyed by these columnLayout labels
+# (extract_batch applies them); the other variants cover Thentia tenants
+# that return keyed objects directly.
 FIELD_MAP = {
-    "last":    ["REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name",
-                "surname"],
-    "first":   ["REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName", "first_name",
-                "givenName"],
+    "last":    ["REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name"],
+    "first":   ["REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName",
+                "first_name"],
     "license": ["REGISTER_PROFILE_LABEL_LICENSE_NUMBER", "licenseNumber",
-                "license_number", "registrationNumber", "licenceNumber"],
+                "license_number"],
     "status":  ["REGISTER_PROFILE_LABEL_LICENSE_STATUS", "status",
-                "licenseStatus", "registrationStatus"],
+                "licenseStatus"],
     "type":    ["REGISTER_PROFILE_LABEL_LICENSE_TYPE", "licenseType",
-                "license_type", "registrationType", "profession"],
-    "city":    ["REGISTER_PROFILE_LABEL_CITY", "city", "addressCity",
-                "practiceCity"],
-    "state":   ["state", "province", "addressState"],
+                "license_type"],
+    "city":    ["REGISTER_PROFILE_LABEL_CITY", "city"],
     "expiry":  ["REGISTER_PROFILE_LABEL_LICENSE_EXPIRY_DATE", "expiryDate",
-                "expirationDate", "expiry"],
+                "expirationDate"],
+    "disc":    ["REGISTER_PROFILE_LABEL_DISCIPLINARY_ACTION",
+                "disciplinaryAction"],
     "id":      ["id", "profileId", "entityId"],
 }
-
-
-def get(url):
-    req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)
 
 
 def pick(rec, keys):
@@ -77,10 +80,14 @@ def pick(rec, keys):
     return ""
 
 
+def get(url):
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
 def extract_batch(data):
-    """Normalize the three Thentia response shapes to a list of keyed records:
-    a bare list, {"result": [...]}, or (Nevada's) {"result": {"dataResults":
-    [...], "columnLayout": [...]}} where rows are positional arrays."""
+    """Normalize the three Thentia response shapes to a list of keyed records."""
     if isinstance(data, list):
         return data
     res = data.get("result")
@@ -100,12 +107,19 @@ def extract_batch(data):
         res if isinstance(res, list) else [])
 
 
-def fetch_keyword(keyword):
-    """Page through the search API for one keyword until it runs dry."""
+def build_url(keyword, status, disciplined, skip, take):
+    params = urllib.parse.urlencode({
+        "keyword": keyword, "skip": skip, "take": take, "lang": "en-us",
+        "licenseType": LICENSE_TYPE, "licenseStatus": status,
+        "disciplined": disciplined,
+    })
+    return f"{SEARCH}?{params}"
+
+
+def fetch_keyword(keyword, status, disciplined):
     out, skip = [], 0
     while True:
-        url = f"{SEARCH}?keyword={keyword}&skip={skip}&take={PAGE_SIZE}&lang=en"
-        data = get(url)
+        data = get(build_url(keyword, status, disciplined, skip, PAGE_SIZE))
         batch = extract_batch(data)
         if not batch:
             break
@@ -116,7 +130,7 @@ def fetch_keyword(keyword):
             break
         if skip > 5000:  # safety cap — NV has ~645 DCs
             break
-        time.sleep(0.5)  # be polite to a state board server
+        time.sleep(0.4)  # be polite to a state board server
     return out
 
 
@@ -128,18 +142,9 @@ def rec_key(rec):
 
 
 def fetch_all():
-    # Some Thentia tenants return everything for keyword=all; others (including
-    # Nevada's) return an empty set for it. Try "all" first, then fall back to
-    # sweeping a-z — every name contains at least one letter — and dedupe.
-    out = fetch_keyword("all")
-    if out:
-        print(f"  fetched {len(out)} via keyword=all", file=sys.stderr)
-        return out
-    print("  keyword=all returned nothing; sweeping a-z instead",
-          file=sys.stderr)
-    seen = set()
-    for letter in "abcdefghijklmnopqrstuvwxyz":
-        batch = fetch_keyword(letter)
+    out, seen = [], set()
+
+    def add_records(batch):
         fresh = 0
         for rec in batch:
             k = rec_key(rec)
@@ -147,53 +152,59 @@ def fetch_all():
                 seen.add(k)
                 out.append(rec)
                 fresh += 1
-        print(f"  keyword={letter}: {len(batch)} records "
-              f"({fresh} new, total {len(out)})", file=sys.stderr)
-        time.sleep(0.5)
+        return fresh
+
+    for disciplined in ("false", "true"):
+        for status in STATUSES:
+            try:
+                batch = fetch_keyword("all", status, disciplined)
+            except Exception:
+                batch = []
+            if batch:
+                fresh = add_records(batch)
+                print(f"  {status} / disciplined={disciplined} keyword=all: "
+                      f"{len(batch)} records ({fresh} new, total {len(out)})",
+                      file=sys.stderr)
+                continue
+            # keyword=all may be a dud on this tenant — sweep a-z, but only
+            # for Active (speculative statuses aren't worth 26 requests each)
+            if status != "Active":
+                continue
+            print(f"  {status} / disciplined={disciplined}: keyword=all "
+                  "empty; sweeping a-z", file=sys.stderr)
+            for letter in "abcdefghijklmnopqrstuvwxyz":
+                try:
+                    batch = fetch_keyword(letter, status, disciplined)
+                except Exception:
+                    batch = []
+                fresh = add_records(batch)
+                if batch:
+                    print(f"    keyword={letter}: {len(batch)} records "
+                          f"({fresh} new, total {len(out)})", file=sys.stderr)
+                time.sleep(0.4)
     return out
 
 
 def probe():
-    url = f"{SEARCH}?keyword=all&skip=0&take=2&lang=en"
+    url = build_url("smith", "Active", "false", 0, 3)
     print(f"Probing {url}\n", file=sys.stderr)
     try:
         data = get(url)
     except Exception as e:
-        print(f"Endpoint failed: {e}\n\n"
-              "Find the real endpoint in 30 seconds:\n"
-              "  1. Open the register page in Chrome:\n"
-              f"     {BASE}/webs/portal/register/#/\n"
-              "  2. Press F12 -> Network tab -> filter 'Fetch/XHR'\n"
-              "  3. Click Search on the page (leave the box empty or type 'all')\n"
-              "  4. The request that returns licensee JSON is your endpoint —\n"
-              "     copy its URL into SEARCH at the top of this script.\n",
-              file=sys.stderr)
+        print(f"Endpoint failed: {e}\n"
+              "Re-capture the request URL from the register page (F12 -> "
+              "Network -> Fetch/XHR\n-> search on the page) and update "
+              "SEARCH/build_url above.", file=sys.stderr)
         return
     batch = extract_batch(data)
     if not batch:
-        print("Endpoint is LIVE but keyword=all returns nothing on this "
-              "tenant.\nTrying keyword=s to sample a real record...\n",
+        print("Endpoint answered but returned 0 records for keyword=smith — "
+              "the filter\nparameters have likely changed. Re-capture the URL "
+              "from the register page\n(F12 -> Network -> Fetch/XHR).",
               file=sys.stderr)
-        try:
-            data = get(f"{SEARCH}?keyword=s&skip=0&take=2&lang=en")
-            batch = extract_batch(data)
-        except Exception as e:
-            print(f"Sample query failed too: {e}", file=sys.stderr)
-            return
-        if not batch:
-            print("Still empty — the search likely needs different "
-                  "parameters.\nOpen the register page in Chrome, press F12 "
-                  "-> Network -> Fetch/XHR,\nrun a search, and copy the URL "
-                  "of the licensee JSON request into SEARCH.", file=sys.stderr)
-            return
-        print("Sample worked — main() will sweep a-z automatically.",
-              file=sys.stderr)
-    else:
-        print("Endpoint is LIVE. First record keys:", file=sys.stderr)
-    if batch:
-        print(json.dumps(batch[0], indent=2)[:1500])
-    else:
-        print(json.dumps(data, indent=2)[:1500])
+        return
+    print("Endpoint is LIVE — sample record:", file=sys.stderr)
+    print(json.dumps(batch[0], indent=2)[:1500])
 
 
 def main():
@@ -202,42 +213,38 @@ def main():
         return
     print("Pulling NV Board licensee register...", file=sys.stderr)
     records = fetch_all()
-    print(f"Total records: {len(records)}", file=sys.stderr)
+    print(f"Total unique records: {len(records)}", file=sys.stderr)
     if not records:
-        print("No records returned — run with --probe to diagnose.", file=sys.stderr)
+        print("No records returned — run with --probe to diagnose.",
+              file=sys.stderr)
         return
 
     with open("nv-board-raw.json", "w") as f:
         json.dump(records, f, indent=2)
 
     cols = ["DC_LastName", "DC_FirstName", "License_Number", "License_Status",
-            "License_Type", "City", "State", "License_Expiry", "Board_Profile_Id",
-            "Source"]
-    kept = 0
+            "License_Type", "City", "State", "License_Expiry",
+            "Disciplinary_Action", "Board_Profile_Id", "Source"]
     with open("nv-board-licensees.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         for rec in records:
-            ltype = pick(rec, FIELD_MAP["type"])
-            # keep DCs; skip chiropractic assistants unless you want them too
-            if ltype and "assist" in ltype.lower():
-                continue
             w.writerow({
                 "DC_LastName": pick(rec, FIELD_MAP["last"]),
                 "DC_FirstName": pick(rec, FIELD_MAP["first"]),
                 "License_Number": pick(rec, FIELD_MAP["license"]),
                 "License_Status": pick(rec, FIELD_MAP["status"]),
-                "License_Type": ltype,
+                "License_Type": pick(rec, FIELD_MAP["type"]),
                 "City": pick(rec, FIELD_MAP["city"]),
-                "State": pick(rec, FIELD_MAP["state"]),
+                "State": "NV",
                 "License_Expiry": pick(rec, FIELD_MAP["expiry"]),
+                "Disciplinary_Action": pick(rec, FIELD_MAP["disc"]),
                 "Board_Profile_Id": pick(rec, FIELD_MAP["id"]),
                 "Source": "NV Board (Thentia)",
             })
-            kept += 1
-    print(f"Wrote nv-board-licensees.csv ({kept} DCs) and nv-board-raw.json",
-          file=sys.stderr)
-    print("\nNext: python3 merge_lists.py  — folds license status into "
+    print(f"Wrote nv-board-licensees.csv ({len(records)} licensees) and "
+          "nv-board-raw.json", file=sys.stderr)
+    print("\nNext: python3 merge_lists.py — folds license status into "
           "nv-chiropractor-list.csv", file=sys.stderr)
 
 

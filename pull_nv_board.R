@@ -3,33 +3,42 @@
 # (Thentia Cloud portal) into a CSV compatible with nv-chiropractor-list.csv.
 #
 # Run on your own machine:        Rscript pull_nv_board.R
-# If the default endpoint fails:  Rscript pull_nv_board.R --probe
+# To test the endpoint first:     Rscript pull_nv_board.R --probe
 # One-time setup:                 install.packages(c("httr", "jsonlite"))
 #
-# Why this works: the register page at
-#   https://nvcpbn.portalus.thentiacloud.net/webs/portal/register/#/
-# is a JavaScript app. The data it displays comes from a public JSON API on the
-# same host (the standard Thentia pattern used by licensing boards nationwide):
-#   /rest/public/profile/search/?keyword=all&skip=0&take=20&lang=en
-# This script pages through that API and flattens the results.
+# The register page (https://nvcpbn.portalus.thentiacloud.net/webs/portal/
+# register/#/) is a JavaScript app backed by a public JSON API. Captured from
+# the page's own network traffic, the real search request is:
+#   /rest/public/profile/search/?keyword=smith&skip=0&take=20&lang=en-us
+#     &licenseType=Chiropractic%20Physician&licenseStatus=Active
+#     &disciplined=false
+# The licenseType/licenseStatus/disciplined filters are REQUIRED — without
+# them the API answers with an empty result set. Responses arrive as
+# {result: {dataResults: [[...], ...], columnLayout: [...]}} with positional
+# rows aligned to columnLayout.
 #
 # This is public record data — NRS 634 requires the Board's roster to be open
-# to public inspection. Be polite anyway: the script rate-limits between pages.
+# to public inspection. Be polite anyway: the script rate-limits requests.
 #
 # Output:
-#   nv-board-licensees.csv  one row per licensee, template-compatible columns
-#   nv-board-raw.json       raw API records, so nothing is lost if the Board's
-#                           field names don't match the mapping below
+#   nv-board-licensees.csv  one row per licensee
+#   nv-board-raw.json       raw API records, in case field mapping ever drifts
 
 library(httr)
 library(jsonlite)
 
-BASE      <- "https://nvcpbn.portalus.thentiacloud.net"
-SEARCH    <- paste0(BASE, "/rest/public/profile/search/")
-PAGE_SIZE <- 100
+BASE         <- "https://nvcpbn.portalus.thentiacloud.net"
+SEARCH       <- paste0(BASE, "/rest/public/profile/search/")
+PAGE_SIZE    <- 100
+LICENSE_TYPE <- "Chiropractic Physician"
+
+# "Active" is confirmed live from the page. The others are common Thentia
+# status values tried opportunistically — a wrong guess just returns 0 rows.
+STATUSES <- c("Active", "Inactive", "Expired", "Suspended", "Revoked",
+              "Delinquent", "Retired")
 
 HEADERS <- add_headers(
-  # a normal browser UA — some WAFs reject default clients
+  # a normal browser UA — the portal's firewall rejects bare clients
   `User-Agent` = paste0("Mozilla/5.0 (Windows NT 10.0; Win64; x64) ",
                         "AppleWebKit/537.36 (KHTML, like Gecko) ",
                         "Chrome/126.0 Safari/537.36"),
@@ -37,25 +46,23 @@ HEADERS <- add_headers(
   Referer   = paste0(BASE, "/webs/portal/register/")
 )
 
-# Thentia field names vary slightly per board; every observed variant listed.
-# The REGISTER_PROFILE_LABEL_* names are Nevada's columnLayout labels, applied
-# when the API returns positional rows (see extract_batch).
+# Nevada returns positional rows keyed by these columnLayout labels
+# (extract_batch applies them); the other variants cover Thentia tenants
+# that return keyed objects directly.
 FIELD_MAP <- list(
-  last    = c("REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name",
-              "surname"),
-  first   = c("REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName", "first_name",
-              "givenName"),
+  last    = c("REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name"),
+  first   = c("REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName", "first_name"),
   license = c("REGISTER_PROFILE_LABEL_LICENSE_NUMBER", "licenseNumber",
-              "license_number", "registrationNumber", "licenceNumber"),
+              "license_number"),
   status  = c("REGISTER_PROFILE_LABEL_LICENSE_STATUS", "status",
-              "licenseStatus", "registrationStatus"),
+              "licenseStatus"),
   type    = c("REGISTER_PROFILE_LABEL_LICENSE_TYPE", "licenseType",
-              "license_type", "registrationType", "profession"),
-  city    = c("REGISTER_PROFILE_LABEL_CITY", "city", "addressCity",
-              "practiceCity"),
-  state   = c("state", "province", "addressState"),
+              "license_type"),
+  city    = c("REGISTER_PROFILE_LABEL_CITY", "city"),
   expiry  = c("REGISTER_PROFILE_LABEL_LICENSE_EXPIRY_DATE", "expiryDate",
-              "expirationDate", "expiry"),
+              "expirationDate"),
+  disc    = c("REGISTER_PROFILE_LABEL_DISCIPLINARY_ACTION",
+              "disciplinaryAction"),
   id      = c("id", "profileId", "entityId")
 )
 
@@ -75,17 +82,16 @@ get_json <- function(url) {
            simplifyVector = FALSE)
 }
 
-# Thentia responses come in three shapes: a bare list of records,
-# {result: [...]}, or (Nevada's) {result: {dataResults: [...],
-# columnLayout: [...]}} where each row is a positional array aligned to
-# columnLayout. Normalize all three to a list of keyed records.
+# Normalize the three Thentia response shapes to a list of keyed records:
+# a bare list, {result: [...]}, or Nevada's {result: {dataResults: [...],
+# columnLayout: [...]}} where each row is a positional array.
 extract_batch <- function(data) {
-  if (is.null(names(data))) return(data)              # bare list of records
+  if (is.null(names(data))) return(data)
   res <- data$result
   if (!is.null(res) && !is.null(names(res)) && !is.null(res$dataResults)) {
     layout <- unlist(res$columnLayout)
     return(lapply(res$dataResults, function(row) {
-      if (!is.null(names(row))) return(row)           # already keyed
+      if (!is.null(names(row))) return(row)
       row <- lapply(row, function(v) if (is.null(v)) "" else v)
       if (!is.null(layout) && length(row) == length(layout))
         return(setNames(row, layout))
@@ -98,13 +104,21 @@ extract_batch <- function(data) {
   list()
 }
 
-fetch_keyword <- function(keyword) {
+build_url <- function(keyword, status, disciplined, skip, take) {
+  paste0(SEARCH,
+         "?keyword=", URLencode(keyword, reserved = TRUE),
+         "&skip=", skip, "&take=", take,
+         "&lang=en-us",
+         "&licenseType=", URLencode(LICENSE_TYPE, reserved = TRUE),
+         "&licenseStatus=", URLencode(status, reserved = TRUE),
+         "&disciplined=", disciplined)
+}
+
+fetch_keyword <- function(keyword, status, disciplined) {
   out <- list()
   skip <- 0
   repeat {
-    url <- sprintf("%s?keyword=%s&skip=%d&take=%d&lang=en",
-                   SEARCH, keyword, skip, PAGE_SIZE)
-    data <- get_json(url)
+    data <- get_json(build_url(keyword, status, disciplined, skip, PAGE_SIZE))
     batch <- extract_batch(data)
     if (length(batch) == 0) break
     out <- c(out, batch)
@@ -112,7 +126,7 @@ fetch_keyword <- function(keyword) {
     skip <- skip + PAGE_SIZE
     if (!is.null(total) && length(out) >= as.integer(total)) break
     if (skip > 5000) break  # safety cap — NV has ~645 DCs
-    Sys.sleep(0.5)          # be polite to a state board server
+    Sys.sleep(0.4)          # be polite to a state board server
   }
   out
 }
@@ -127,72 +141,69 @@ rec_key <- function(rec) {
 }
 
 fetch_all <- function() {
-  # Some Thentia tenants return everything for keyword=all; others (including
-  # Nevada's) return an empty set for it. Try "all" first, then fall back to
-  # sweeping a-z — every name contains at least one letter — and dedupe.
-  out <- fetch_keyword("all")
-  if (length(out) > 0) {
-    message("  fetched ", length(out), " via keyword=all")
-    return(out)
-  }
-  message("  keyword=all returned nothing; sweeping a-z instead")
+  out <- list()
   seen <- character(0)
-  for (letter in letters) {
-    batch <- fetch_keyword(letter)
+  add_records <- function(batch) {
     fresh <- 0
     for (rec in batch) {
       k <- rec_key(rec)
       if (!(k %in% seen)) {
-        seen <- c(seen, k)
-        out <- c(out, list(rec))
+        seen <<- c(seen, k)
+        out[[length(out) + 1]] <<- rec
         fresh <- fresh + 1
       }
     }
-    message("  keyword=", letter, ": ", length(batch),
-            " records (", fresh, " new, total ", length(out), ")")
-    Sys.sleep(0.5)
+    fresh
+  }
+
+  for (disciplined in c("false", "true")) {
+    for (status in STATUSES) {
+      batch <- tryCatch(fetch_keyword("all", status, disciplined),
+                        error = function(e) list())
+      if (length(batch) > 0) {
+        fresh <- add_records(batch)
+        message("  ", status, " / disciplined=", disciplined,
+                " keyword=all: ", length(batch), " records (",
+                fresh, " new, total ", length(out), ")")
+        next
+      }
+      # keyword=all may be a dud on this tenant — sweep a-z, but only for
+      # Active (the speculative statuses aren't worth 26 extra requests each)
+      if (status != "Active") next
+      message("  ", status, " / disciplined=", disciplined,
+              ": keyword=all empty; sweeping a-z")
+      for (letter in letters) {
+        batch <- tryCatch(fetch_keyword(letter, status, disciplined),
+                          error = function(e) list())
+        fresh <- add_records(batch)
+        if (length(batch) > 0)
+          message("    keyword=", letter, ": ", length(batch), " records (",
+                  fresh, " new, total ", length(out), ")")
+        Sys.sleep(0.4)
+      }
+    }
   }
   out
 }
 
 probe <- function() {
-  url <- sprintf("%s?keyword=all&skip=0&take=2&lang=en", SEARCH)
+  url <- build_url("smith", "Active", "false", 0, 3)
   message("Probing ", url, "\n")
   data <- tryCatch(get_json(url), error = function(e) e)
   if (inherits(data, "error")) {
-    message("Endpoint failed: ", conditionMessage(data), "\n\n",
-      "Find the real endpoint in 30 seconds:\n",
-      "  1. Open the register page in Chrome:\n",
-      "     ", BASE, "/webs/portal/register/#/\n",
-      "  2. Press F12 -> Network tab -> filter 'Fetch/XHR'\n",
-      "  3. Click Search on the page (leave the box empty or type 'all')\n",
-      "  4. The request that returns licensee JSON is your endpoint —\n",
-      "     copy its URL into SEARCH at the top of this script.\n")
+    message("Endpoint failed: ", conditionMessage(data), "\n",
+      "Re-capture the request URL from the register page (F12 -> Network ->\n",
+      "Fetch/XHR -> search on the page) and update SEARCH/build_url above.")
     return(invisible(NULL))
   }
   batch <- extract_batch(data)
   if (length(batch) == 0) {
-    message("Endpoint is LIVE but keyword=all returns nothing on this tenant.")
-    message("Trying keyword=s to sample a real record...\n")
-    data <- tryCatch(
-      get_json(sprintf("%s?keyword=s&skip=0&take=2&lang=en", SEARCH)),
-      error = function(e) e)
-    if (inherits(data, "error")) {
-      message("Sample query failed too: ", conditionMessage(data))
-      return(invisible(NULL))
-    }
-    batch <- extract_batch(data)
-    if (length(batch) == 0) {
-      message("Still empty — the search likely needs different parameters.\n",
-        "Open ", BASE, "/webs/portal/register/#/ in Chrome, press F12 ->\n",
-        "Network -> Fetch/XHR, run a search on the page, and copy the URL\n",
-        "of the request that returns licensee JSON into SEARCH above.")
-      return(invisible(NULL))
-    }
-    message("Sample worked — main() will sweep a-z automatically.")
-  } else {
-    message("Endpoint is LIVE. First record keys:")
+    message("Endpoint answered but returned 0 records for keyword=smith —\n",
+            "the filter parameters have likely changed. Re-capture the URL\n",
+            "from the register page (F12 -> Network -> Fetch/XHR).")
+    return(invisible(NULL))
   }
+  message("Endpoint is LIVE — sample record:")
   cat(substr(toJSON(batch[[1]], auto_unbox = TRUE, pretty = TRUE), 1, 1500),
       "\n")
 }
@@ -204,40 +215,36 @@ main <- function() {
   }
   message("Pulling NV Board licensee register...")
   records <- fetch_all()
-  message("Total records: ", length(records))
+  message("Total unique records: ", length(records))
   if (length(records) == 0) {
-    message("No records returned — run with --probe to diagnose.")
+    message("No records returned — run probe() to diagnose.")
     return(invisible(NULL))
   }
 
   write(toJSON(records, auto_unbox = TRUE, pretty = TRUE), "nv-board-raw.json")
 
   rows <- lapply(records, function(rec) {
-    ltype <- pick(rec, FIELD_MAP$type)
-    # keep DCs; skip chiropractic assistants unless you want them too
-    if (nzchar(ltype) && grepl("assist", ltype, ignore.case = TRUE))
-      return(NULL)
     data.frame(
-      DC_LastName      = pick(rec, FIELD_MAP$last),
-      DC_FirstName     = pick(rec, FIELD_MAP$first),
-      License_Number   = pick(rec, FIELD_MAP$license),
-      License_Status   = pick(rec, FIELD_MAP$status),
-      License_Type     = ltype,
-      City             = pick(rec, FIELD_MAP$city),
-      State            = pick(rec, FIELD_MAP$state),
-      License_Expiry   = pick(rec, FIELD_MAP$expiry),
-      Board_Profile_Id = pick(rec, FIELD_MAP$id),
-      Source           = "NV Board (Thentia)",
-      stringsAsFactors = FALSE
+      DC_LastName         = pick(rec, FIELD_MAP$last),
+      DC_FirstName        = pick(rec, FIELD_MAP$first),
+      License_Number      = pick(rec, FIELD_MAP$license),
+      License_Status      = pick(rec, FIELD_MAP$status),
+      License_Type        = pick(rec, FIELD_MAP$type),
+      City                = pick(rec, FIELD_MAP$city),
+      State               = "NV",
+      License_Expiry      = pick(rec, FIELD_MAP$expiry),
+      Disciplinary_Action = pick(rec, FIELD_MAP$disc),
+      Board_Profile_Id    = pick(rec, FIELD_MAP$id),
+      Source              = "NV Board (Thentia)",
+      stringsAsFactors    = FALSE
     )
   })
-  rows <- Filter(Negate(is.null), rows)
   df <- do.call(rbind, rows)
 
   write.csv(df, "nv-board-licensees.csv", row.names = FALSE, na = "")
   message("Wrote nv-board-licensees.csv (", nrow(df),
-          " DCs) and nv-board-raw.json")
-  message("\nNext: Rscript merge_lists.R  — folds license status into ",
+          " licensees) and nv-board-raw.json")
+  message("\nNext: source(\"merge_lists.R\") — folds license status into ",
           "nv-chiropractor-list.csv")
 }
 
