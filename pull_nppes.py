@@ -15,6 +15,11 @@ BASE = "https://npiregistry.cms.hhs.gov/api/"
 CLARK = {"LAS VEGAS", "HENDERSON", "NORTH LAS VEGAS", "BOULDER CITY", "MESQUITE", "LAUGHLIN"}
 WASHOE = {"RENO", "SPARKS", "INCLINE VILLAGE"}
 
+# NPPES caps `skip` at 1000 (max 1200 records per query) and silently repeats
+# pages beyond that. So we segment the state by zip prefix — every NV zip is
+# 889xx-898xx — keeping each slice safely under the cap, then dedupe by NPI.
+POSTAL_PREFIXES = [f"{n}*" for n in range(889, 900)]
+
 COLS = ["Priority", "DC_LastName", "DC_FirstName", "Clinic_Name", "City", "County",
         "State", "Practice_Address", "Postal", "Phone", "Email", "Website",
         "LinkedIn_URL", "NPI", "License_Status", "Bills_Insurance", "Cash_Only_Flag",
@@ -23,11 +28,12 @@ COLS = ["Priority", "DC_LastName", "DC_FirstName", "Clinic_Name", "City", "Count
         "Review_Sent", "Founding_Client", "Outcome", "OptOut", "Notes"]
 
 
-def pull():
+def pull_slice(postal_prefix):
     rows, skip = [], 0
     while True:
         url = (f"{BASE}?version=2.1&taxonomy_description=Chiropractor"
-               f"&state=NV&country_code=US&limit=200&skip={skip}")
+               f"&state=NV&postal_code={postal_prefix}"
+               f"&country_code=US&limit=200&skip={skip}")
         try:
             with urllib.request.urlopen(url, timeout=30) as r:
                 data = json.load(r)
@@ -38,11 +44,32 @@ def pull():
         if not results:
             break
         rows.extend(results)
+        if len(results) < 200:  # last page of this slice
+            break
         skip += 200
-        if len(results) < 200 or skip > 4000:  # safety cap
+        if skip > 1000:  # NPPES hard cap — repeats pages beyond
+            print(f"  WARNING: zip slice {postal_prefix} hit the 1200-record "
+                  "API cap; slice may be incomplete", file=sys.stderr)
             break
         time.sleep(0.3)
     return rows
+
+
+def pull():
+    rows = []
+    for pfx in POSTAL_PREFIXES:
+        batch = pull_slice(pfx)
+        if batch:
+            print(f"  zip {pfx}: {len(batch)} records", file=sys.stderr)
+        rows.extend(batch)
+    # dedupe by NPI (providers can surface in more than one slice/query)
+    seen, unique = set(), []
+    for it in rows:
+        npi = it.get("number")
+        if npi not in seen:
+            seen.add(npi)
+            unique.append(it)
+    return unique
 
 
 def main():

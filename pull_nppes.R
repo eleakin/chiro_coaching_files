@@ -19,6 +19,11 @@ CLARK <- c("LAS VEGAS", "HENDERSON", "NORTH LAS VEGAS", "BOULDER CITY",
            "MESQUITE", "LAUGHLIN")
 WASHOE <- c("RENO", "SPARKS", "INCLINE VILLAGE")
 
+# NPPES caps `skip` at 1000 (max 1200 records per query) and silently repeats
+# pages beyond that. So we segment the state by zip prefix — every NV zip is
+# 889xx–898xx — keeping each slice safely under the cap, then dedupe by NPI.
+POSTAL_PREFIXES <- sprintf("%d*", 889:899)
+
 COLS <- c("Priority", "DC_LastName", "DC_FirstName", "Clinic_Name", "City",
           "County", "State", "Practice_Address", "Postal", "Phone", "Email",
           "Website", "LinkedIn_URL", "NPI", "License_Status", "Bills_Insurance",
@@ -33,7 +38,7 @@ pick <- function(x, key) {
   if (is.null(v) || length(v) == 0) "" else trimws(as.character(v)[1])
 }
 
-pull_all <- function() {
+pull_slice <- function(postal_prefix) {
   records <- list()
   skip <- 0
   repeat {
@@ -41,6 +46,7 @@ pull_all <- function() {
       version = "2.1",
       taxonomy_description = "Chiropractor",
       state = "NV",
+      postal_code = postal_prefix,
       country_code = "US",
       limit = 200,
       skip = skip
@@ -54,12 +60,29 @@ pull_all <- function() {
     results <- data$results
     if (is.null(results) || length(results) == 0) break
     records <- c(records, results)
+    if (length(results) < 200) break   # last page of this slice
     skip <- skip + 200
-    message("  fetched ", length(records))
-    if (length(results) < 200 || skip > 4000) break  # safety cap
+    if (skip > 1000) {                 # NPPES hard cap — repeats pages beyond
+      message("  WARNING: zip slice ", postal_prefix,
+              " hit the 1200-record API cap; slice may be incomplete")
+      break
+    }
     Sys.sleep(0.3)
   }
   records
+}
+
+pull_all <- function() {
+  records <- list()
+  for (pfx in POSTAL_PREFIXES) {
+    slice <- pull_slice(pfx)
+    if (length(slice) > 0)
+      message("  zip ", pfx, ": ", length(slice), " records")
+    records <- c(records, slice)
+  }
+  # dedupe by NPI (providers can surface in more than one slice/query)
+  npis <- vapply(records, function(it) pick(it, "number"), character(1))
+  records[!duplicated(npis)]
 }
 
 main <- function() {
