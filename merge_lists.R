@@ -27,6 +27,15 @@ norm <- function(s) {
   gsub("[^A-Z]", "", toupper(trimws(s)))
 }
 
+# status priority: a person can match several board records (old expired
+# license + current active one) — the best status must win, never the one
+# that happens to be processed last
+status_rank <- function(s) {
+  r <- match(tolower(s), c("active", "suspended", "inactive", "delinquent",
+                           "expired", "retired", "revoked"))
+  ifelse(is.na(r), 99L, r)
+}
+
 # empty-string-safe getter for data.frame rows
 val <- function(df, i, col) {
   v <- df[[col]][i]
@@ -57,6 +66,7 @@ main <- function() {
 
   matched <- 0
   updated <- 0
+  skipped_ghosts <- 0
   new_rows <- list()
 
   for (i in seq_len(nrow(board))) {
@@ -72,8 +82,12 @@ main <- function() {
       matched <- matched + 1
       b_status <- val(board, i, "License_Status")
       b_lic    <- val(board, i, "License_Number")
+      b_disc   <- val(board, i, "Disciplinary_Action")
       for (j in hits) {
-        if (nzchar(b_status) && master$License_Status[j] != b_status) {
+        cur <- master$License_Status[j]
+        # only upgrade: better-ranked status wins regardless of record order
+        if (nzchar(b_status) && cur != b_status &&
+            status_rank(b_status) < status_rank(cur)) {
           master$License_Status[j] <- b_status
           updated <- updated + 1
         }
@@ -84,19 +98,36 @@ main <- function() {
                                    paste(master$Notes[j], note, sep = "; "))
           }
         }
+        if (tolower(b_disc) %in% c("yes", "true", "y")) {
+          if (!grepl("disciplinary action on record", master$Notes[j],
+                     fixed = TRUE)) {
+            master$Notes[j] <- sub("^; ", "",
+              paste(master$Notes[j], "disciplinary action on record",
+                    sep = "; "))
+          }
+        }
       }
-    } else {
-      # Board licensee NPPES missed — add as a lead needing enrichment
+    } else if (tolower(val(board, i, "License_Status")) == "active") {
+      # Active board licensee NPPES missed — a real lead needing enrichment.
+      # Non-active unmatched licensees are skipped: appending ~900
+      # expired/revoked ghosts would just pad the list with junk rows.
+      city_up <- toupper(val(board, i, "City"))
       row <- setNames(as.list(rep("", ncol(master))), names(master))
       row$Priority        <- "C"
       row$DC_LastName     <- val(board, i, "DC_LastName")
       row$DC_FirstName    <- val(board, i, "DC_FirstName")
       row$City            <- val(board, i, "City")
-      row$State           <- if (nzchar(val(board, i, "State")))
-                               val(board, i, "State") else "NV"
+      row$State           <- "NV"
       row$License_Status  <- val(board, i, "License_Status")
       row$Bills_Insurance <- "Unknown"
-      row$Segment         <- "Other NV"
+      row$Segment         <- if (city_up %in% c("LAS VEGAS", "HENDERSON",
+                                 "NORTH LAS VEGAS", "BOULDER CITY",
+                                 "MESQUITE", "LAUGHLIN"))
+                               "Clark (Vegas/Henderson)"
+                             else if (city_up %in% c("RENO", "SPARKS",
+                                      "INCLINE VILLAGE"))
+                               "Washoe (Reno/Sparks)"
+                             else "Other NV"
       row$Source          <- "NV Board only"
       lic <- val(board, i, "License_Number")
       row$Notes <- sub("^; ", "", paste0(
@@ -104,6 +135,8 @@ main <- function() {
         "; no individual NPI — find clinic to enrich"))
       new_rows[[length(new_rows) + 1]] <-
         as.data.frame(row, stringsAsFactors = FALSE, check.names = FALSE)
+    } else {
+      skipped_ghosts <- skipped_ghosts + 1
     }
   }
 
@@ -117,7 +150,8 @@ main <- function() {
                     c("", "active", "unknown"))
   cat("Board records matched to master:", matched, "\n")
   cat("License_Status values updated:  ", updated, "\n")
-  cat("Board-only rows appended:       ", length(new_rows), "\n")
+  cat("Active board-only rows appended:", length(new_rows), "\n")
+  cat("Non-active unmatched skipped:   ", skipped_ghosts, "\n")
   cat("Rows now flagged non-active:    ", inactive,
       " (review before contacting — retired/lapsed DCs are not targets)\n")
   cat("\nWrote", MASTER, "(backup at", paste0(BACKUP, ")"), "\n")
