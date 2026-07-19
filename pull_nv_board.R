@@ -46,22 +46,24 @@ HEADERS <- add_headers(
   Referer   = paste0(BASE, "/webs/portal/register/")
 )
 
-# Nevada returns positional rows keyed by these columnLayout labels
-# (extract_batch applies them); the other variants cover Thentia tenants
-# that return keyed objects directly.
+# Nevada returns rows as {id, columnValues: [{data, type}, ...]} aligned to
+# columnLayout; extract_batch flattens them to records keyed by these labels.
+# QUERY_STATUS / QUERY_DISCIPLINED are stamped from the query parameters at
+# fetch time — ground truth, immune to lookup-token values in the columns.
 FIELD_MAP <- list(
   last    = c("REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name"),
   first   = c("REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName", "first_name"),
   license = c("REGISTER_PROFILE_LABEL_LICENSE_NUMBER", "licenseNumber",
               "license_number"),
-  status  = c("REGISTER_PROFILE_LABEL_LICENSE_STATUS", "status",
-              "licenseStatus"),
+  status  = c("QUERY_STATUS", "REGISTER_PROFILE_LABEL_LICENSE_STATUS",
+              "status", "licenseStatus"),
   type    = c("REGISTER_PROFILE_LABEL_LICENSE_TYPE", "licenseType",
               "license_type"),
   city    = c("REGISTER_PROFILE_LABEL_CITY", "city"),
   expiry  = c("REGISTER_PROFILE_LABEL_LICENSE_EXPIRY_DATE", "expiryDate",
               "expirationDate"),
-  disc    = c("REGISTER_PROFILE_LABEL_DISCIPLINARY_ACTION",
+  disc    = c("QUERY_DISCIPLINED",
+              "REGISTER_PROFILE_LABEL_DISCIPLINARY_ACTION",
               "disciplinaryAction"),
   id      = c("id", "profileId", "entityId")
 )
@@ -82,15 +84,24 @@ get_json <- function(url) {
            simplifyVector = FALSE)
 }
 
-# Normalize the three Thentia response shapes to a list of keyed records:
-# a bare list, {result: [...]}, or Nevada's {result: {dataResults: [...],
-# columnLayout: [...]}} where each row is a positional array.
+# Normalize the Thentia response shapes to a list of keyed records: a bare
+# list, {result: [...]}, or Nevada's {result: {dataResults: [...],
+# columnLayout: [...]}} — where each row is {id, columnValues: [{data, type},
+# ...]} with values positionally aligned to columnLayout.
 extract_batch <- function(data) {
   if (is.null(names(data))) return(data)
   res <- data$result
   if (!is.null(res) && !is.null(names(res)) && !is.null(res$dataResults)) {
     layout <- unlist(res$columnLayout)
     return(lapply(res$dataResults, function(row) {
+      if (!is.null(names(row)) && !is.null(row$columnValues)) {
+        vals <- lapply(row$columnValues,
+                       function(cv) if (is.null(cv$data)) "" else cv$data)
+        n <- min(length(vals), length(layout))
+        rec <- setNames(vals[seq_len(n)], layout[seq_len(n)])
+        rec$id <- row$id
+        return(rec)
+      }
       if (!is.null(names(row))) return(row)
       row <- lapply(row, function(v) if (is.null(v)) "" else v)
       if (!is.null(layout) && length(row) == length(layout))
@@ -143,12 +154,16 @@ rec_key <- function(rec) {
 fetch_all <- function() {
   out <- list()
   seen <- character(0)
-  add_records <- function(batch) {
+  # stamp each record with the query's status/disciplined — ground truth for
+  # fields whose column values may be lookup tokens
+  add_records <- function(batch, status, disciplined) {
     fresh <- 0
     for (rec in batch) {
       k <- rec_key(rec)
       if (!(k %in% seen)) {
         seen <<- c(seen, k)
+        rec$QUERY_STATUS <- status
+        rec$QUERY_DISCIPLINED <- if (disciplined == "true") "Yes" else "No"
         out[[length(out) + 1]] <<- rec
         fresh <- fresh + 1
       }
@@ -156,12 +171,15 @@ fetch_all <- function() {
     fresh
   }
 
-  for (disciplined in c("false", "true")) {
+  # disciplined=true FIRST: disciplined=false is a superset (it means "don't
+  # filter", not "non-disciplined only"), so the disciplined stamp must land
+  # before the dedupe sees those records again
+  for (disciplined in c("true", "false")) {
     for (status in STATUSES) {
       batch <- tryCatch(fetch_keyword("all", status, disciplined),
                         error = function(e) list())
       if (length(batch) > 0) {
-        fresh <- add_records(batch)
+        fresh <- add_records(batch, status, disciplined)
         message("  ", status, " / disciplined=", disciplined,
                 " keyword=all: ", length(batch), " records (",
                 fresh, " new, total ", length(out), ")")
@@ -175,7 +193,7 @@ fetch_all <- function() {
       for (letter in letters) {
         batch <- tryCatch(fetch_keyword(letter, status, disciplined),
                           error = function(e) list())
-        fresh <- add_records(batch)
+        fresh <- add_records(batch, status, disciplined)
         if (length(batch) > 0)
           message("    keyword=", letter, ": ", length(batch), " records (",
                   fresh, " new, total ", length(out), ")")
@@ -229,7 +247,8 @@ main <- function() {
       DC_FirstName        = pick(rec, FIELD_MAP$first),
       License_Number      = pick(rec, FIELD_MAP$license),
       License_Status      = pick(rec, FIELD_MAP$status),
-      License_Type        = pick(rec, FIELD_MAP$type),
+      # the type column is a lookup token; the query filter fixes the value
+      License_Type        = LICENSE_TYPE,
       City                = pick(rec, FIELD_MAP$city),
       State               = "NV",
       License_Expiry      = pick(rec, FIELD_MAP$expiry),

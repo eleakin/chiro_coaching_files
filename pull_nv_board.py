@@ -50,23 +50,25 @@ HEADERS = {
     "Referer": BASE + "/webs/portal/register/",
 }
 
-# Nevada returns positional rows keyed by these columnLayout labels
-# (extract_batch applies them); the other variants cover Thentia tenants
-# that return keyed objects directly.
+# Nevada returns rows as {id, columnValues: [{data, type}, ...]} aligned to
+# columnLayout; extract_batch flattens them to records keyed by these labels.
+# QUERY_STATUS / QUERY_DISCIPLINED are stamped from the query parameters at
+# fetch time — ground truth, immune to lookup-token values in the columns.
 FIELD_MAP = {
     "last":    ["REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name"],
     "first":   ["REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName",
                 "first_name"],
     "license": ["REGISTER_PROFILE_LABEL_LICENSE_NUMBER", "licenseNumber",
                 "license_number"],
-    "status":  ["REGISTER_PROFILE_LABEL_LICENSE_STATUS", "status",
-                "licenseStatus"],
+    "status":  ["QUERY_STATUS", "REGISTER_PROFILE_LABEL_LICENSE_STATUS",
+                "status", "licenseStatus"],
     "type":    ["REGISTER_PROFILE_LABEL_LICENSE_TYPE", "licenseType",
                 "license_type"],
     "city":    ["REGISTER_PROFILE_LABEL_CITY", "city"],
     "expiry":  ["REGISTER_PROFILE_LABEL_LICENSE_EXPIRY_DATE", "expiryDate",
                 "expirationDate"],
-    "disc":    ["REGISTER_PROFILE_LABEL_DISCIPLINARY_ACTION",
+    "disc":    ["QUERY_DISCIPLINED",
+                "REGISTER_PROFILE_LABEL_DISCIPLINARY_ACTION",
                 "disciplinaryAction"],
     "id":      ["id", "profileId", "entityId"],
 }
@@ -87,7 +89,9 @@ def get(url):
 
 
 def extract_batch(data):
-    """Normalize the three Thentia response shapes to a list of keyed records."""
+    """Normalize the Thentia response shapes to a list of keyed records.
+    Nevada's rows are {id, columnValues: [{data, type}, ...]} with values
+    positionally aligned to columnLayout."""
     if isinstance(data, list):
         return data
     res = data.get("result")
@@ -95,7 +99,13 @@ def extract_batch(data):
         layout = res.get("columnLayout") or []
         out = []
         for row in res.get("dataResults") or []:
-            if isinstance(row, dict):
+            if isinstance(row, dict) and "columnValues" in row:
+                vals = [(cv or {}).get("data") or ""
+                        for cv in row.get("columnValues") or []]
+                rec = dict(zip(layout, vals))
+                rec["id"] = row.get("id", "")
+                out.append(rec)
+            elif isinstance(row, dict):
                 out.append(row)
             elif isinstance(row, list) and len(row) == len(layout):
                 out.append({k: ("" if v is None else v)
@@ -144,24 +154,32 @@ def rec_key(rec):
 def fetch_all():
     out, seen = [], set()
 
-    def add_records(batch):
+    def add_records(batch, status, disciplined):
+        # stamp each record with the query's status/disciplined — ground
+        # truth for fields whose column values may be lookup tokens
         fresh = 0
         for rec in batch:
             k = rec_key(rec)
             if k not in seen:
                 seen.add(k)
+                rec["QUERY_STATUS"] = status
+                rec["QUERY_DISCIPLINED"] = ("Yes" if disciplined == "true"
+                                            else "No")
                 out.append(rec)
                 fresh += 1
         return fresh
 
-    for disciplined in ("false", "true"):
+    # disciplined=true FIRST: disciplined=false is a superset (it means
+    # "don't filter", not "non-disciplined only"), so the disciplined stamp
+    # must land before the dedupe sees those records again
+    for disciplined in ("true", "false"):
         for status in STATUSES:
             try:
                 batch = fetch_keyword("all", status, disciplined)
             except Exception:
                 batch = []
             if batch:
-                fresh = add_records(batch)
+                fresh = add_records(batch, status, disciplined)
                 print(f"  {status} / disciplined={disciplined} keyword=all: "
                       f"{len(batch)} records ({fresh} new, total {len(out)})",
                       file=sys.stderr)
@@ -177,7 +195,7 @@ def fetch_all():
                     batch = fetch_keyword(letter, status, disciplined)
                 except Exception:
                     batch = []
-                fresh = add_records(batch)
+                fresh = add_records(batch, status, disciplined)
                 if batch:
                     print(f"    keyword={letter}: {len(batch)} records "
                           f"({fresh} new, total {len(out)})", file=sys.stderr)
@@ -234,7 +252,8 @@ def main():
                 "DC_FirstName": pick(rec, FIELD_MAP["first"]),
                 "License_Number": pick(rec, FIELD_MAP["license"]),
                 "License_Status": pick(rec, FIELD_MAP["status"]),
-                "License_Type": pick(rec, FIELD_MAP["type"]),
+                # the type column is a lookup token; the query filter fixes it
+                "License_Type": LICENSE_TYPE,
                 "City": pick(rec, FIELD_MAP["city"]),
                 "State": "NV",
                 "License_Expiry": pick(rec, FIELD_MAP["expiry"]),
