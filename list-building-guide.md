@@ -6,6 +6,8 @@ fuel for the outbound kit. Build it once, keep it current, work it forever.
 
 **Files in this folder:**
 - `pull_nppes.py` — pulls the raw statewide list from the federal registry
+- `pull_nv_board.py` — scrapes the NV Board's public licensee register (Thentia portal)
+- `merge_lists.py` — folds Board license status into the master list automatically
 - `nv-chiropractor-list.csv` — the working spreadsheet (template + 2 example rows)
 - `outbound-kit.md` / `founding-client-offer.md` — what you do with the list
 
@@ -43,12 +45,26 @@ monthly to catch new providers — NPPES updates weekly.
 **What it doesn't:** email, license status, or whether they bill insurance —
 that's Steps 2–4.
 
-## Step 2 — Verify license status (GLSuite)
+## Step 2 — Verify license status (automated)
 
-Spot-check names against the NV Board licensee search
-(nvbochiro.glsuite.us/.../LicenseeSearch.aspx). Mark `License_Status` =
-Active / Inactive / Unknown. Drop inactive/retired licenses. You don't need to
-check all 645 up front — verify each contact when it moves to Priority A/B.
+The Board's current public register lives on a Thentia Cloud portal
+(nvcpbn.portalus.thentiacloud.net/webs/portal/register/#/). It's a JavaScript
+app, but its data comes from a public JSON API — `pull_nv_board.py` pages
+through that API and writes `nv-board-licensees.csv`.
+
+```
+python3 pull_nv_board.py        # scrape the register (--probe to diagnose)
+python3 merge_lists.py          # fold license status into the master list
+```
+
+The merge fills `License_Status` on every matched row, tags license numbers in
+Notes, and appends Board licensees NPPES missed (DCs without an individual NPI)
+as new leads. Drop or deprioritize anything not Active — retired/lapsed DCs are
+not targets. If Thentia ever changes its endpoint, `--probe` mode prints
+30-second instructions for finding the new one in Chrome's Network tab.
+
+Manual fallback: the older GLSuite search
+(nvbochiro.glsuite.us/.../LicenseeSearch.aspx) still answers one-off checks.
 
 ## Step 3 — Enrich contact info (the real work)
 
@@ -141,8 +157,9 @@ These columns line up with the tracking fields in `outbound-kit.md` §7 and the
 ## The 3-hour weekend that starts everything
 
 1. Run `pull_nppes.py` (or export from the NPPES site) → full statewide backbone.
-2. Filter to Clark + Washoe insurance-billing candidates.
-3. Enrich the top **30** (email, website, LinkedIn) → mark them Priority A.
-4. Open `outbound-kit.md` and send Monday's first batch.
+2. Run `pull_nv_board.py` then `merge_lists.py` → license-verified list.
+3. Filter to Clark + Washoe insurance-billing candidates.
+4. Enrich the top **30** (email, website, LinkedIn) → mark them Priority A.
+5. Open `outbound-kit.md` and send Monday's first batch.
 
 You now have a finite, named market and a system to work it end to end.
