@@ -69,27 +69,62 @@ def pick(rec, keys):
     return ""
 
 
-def fetch_all():
-    """Page through the search API until it runs dry."""
+def extract_batch(data):
+    # Thentia responses are either a bare list or {"result": [...], "resultCount": N}
+    return data if isinstance(data, list) else (
+        data.get("result") or data.get("results") or data.get("data") or [])
+
+
+def fetch_keyword(keyword):
+    """Page through the search API for one keyword until it runs dry."""
     out, skip = [], 0
     while True:
-        url = f"{SEARCH}?keyword=all&skip={skip}&take={PAGE_SIZE}&lang=en"
+        url = f"{SEARCH}?keyword={keyword}&skip={skip}&take={PAGE_SIZE}&lang=en"
         data = get(url)
-        # Thentia responses are either a bare list or {"result": [...], "resultCount": N}
-        batch = data if isinstance(data, list) else (
-            data.get("result") or data.get("results") or data.get("data") or [])
+        batch = extract_batch(data)
         if not batch:
             break
         out.extend(batch)
         total = None if isinstance(data, list) else data.get("resultCount")
         skip += PAGE_SIZE
-        print(f"  fetched {len(out)}" + (f" / {total}" if total else ""),
-              file=sys.stderr)
         if total is not None and len(out) >= int(total):
             break
         if skip > 5000:  # safety cap — NV has ~645 DCs
             break
         time.sleep(0.5)  # be polite to a state board server
+    return out
+
+
+def rec_key(rec):
+    """Dedupe key: license number, else id, else full name."""
+    k = pick(rec, FIELD_MAP["license"]) or pick(rec, FIELD_MAP["id"]) or (
+        pick(rec, FIELD_MAP["last"]) + " " + pick(rec, FIELD_MAP["first"]))
+    return k.upper()
+
+
+def fetch_all():
+    # Some Thentia tenants return everything for keyword=all; others (including
+    # Nevada's) return an empty set for it. Try "all" first, then fall back to
+    # sweeping a-z — every name contains at least one letter — and dedupe.
+    out = fetch_keyword("all")
+    if out:
+        print(f"  fetched {len(out)} via keyword=all", file=sys.stderr)
+        return out
+    print("  keyword=all returned nothing; sweeping a-z instead",
+          file=sys.stderr)
+    seen = set()
+    for letter in "abcdefghijklmnopqrstuvwxyz":
+        batch = fetch_keyword(letter)
+        fresh = 0
+        for rec in batch:
+            k = rec_key(rec)
+            if k not in seen:
+                seen.add(k)
+                out.append(rec)
+                fresh += 1
+        print(f"  keyword={letter}: {len(batch)} records "
+              f"({fresh} new, total {len(out)})", file=sys.stderr)
+        time.sleep(0.5)
     return out
 
 
@@ -109,9 +144,27 @@ def probe():
               "     copy its URL into SEARCH at the top of this script.\n",
               file=sys.stderr)
         return
-    batch = data if isinstance(data, list) else (
-        data.get("result") or data.get("results") or data.get("data") or [])
-    print("Endpoint is LIVE. First record keys:", file=sys.stderr)
+    batch = extract_batch(data)
+    if not batch:
+        print("Endpoint is LIVE but keyword=all returns nothing on this "
+              "tenant.\nTrying keyword=s to sample a real record...\n",
+              file=sys.stderr)
+        try:
+            data = get(f"{SEARCH}?keyword=s&skip=0&take=2&lang=en")
+            batch = extract_batch(data)
+        except Exception as e:
+            print(f"Sample query failed too: {e}", file=sys.stderr)
+            return
+        if not batch:
+            print("Still empty — the search likely needs different "
+                  "parameters.\nOpen the register page in Chrome, press F12 "
+                  "-> Network -> Fetch/XHR,\nrun a search, and copy the URL "
+                  "of the licensee JSON request into SEARCH.", file=sys.stderr)
+            return
+        print("Sample worked — main() will sweep a-z automatically.",
+              file=sys.stderr)
+    else:
+        print("Endpoint is LIVE. First record keys:", file=sys.stderr)
     if batch:
         print(json.dumps(batch[0], indent=2)[:1500])
     else:

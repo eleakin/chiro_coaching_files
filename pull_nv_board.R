@@ -77,23 +77,59 @@ extract_batch <- function(data) {
   list()
 }
 
-fetch_all <- function() {
+fetch_keyword <- function(keyword) {
   out <- list()
   skip <- 0
   repeat {
-    url <- sprintf("%s?keyword=all&skip=%d&take=%d&lang=en",
-                   SEARCH, skip, PAGE_SIZE)
+    url <- sprintf("%s?keyword=%s&skip=%d&take=%d&lang=en",
+                   SEARCH, keyword, skip, PAGE_SIZE)
     data <- get_json(url)
     batch <- extract_batch(data)
     if (length(batch) == 0) break
     out <- c(out, batch)
     total <- if (is.null(names(data))) NULL else data$resultCount
     skip <- skip + PAGE_SIZE
-    message("  fetched ", length(out),
-            if (!is.null(total)) paste0(" / ", total) else "")
     if (!is.null(total) && length(out) >= as.integer(total)) break
     if (skip > 5000) break  # safety cap — NV has ~645 DCs
     Sys.sleep(0.5)          # be polite to a state board server
+  }
+  out
+}
+
+# dedupe key for a raw record: license number, else id, else full name
+rec_key <- function(rec) {
+  k <- pick(rec, FIELD_MAP$license)
+  if (!nzchar(k)) k <- pick(rec, FIELD_MAP$id)
+  if (!nzchar(k)) k <- paste(pick(rec, FIELD_MAP$last),
+                             pick(rec, FIELD_MAP$first))
+  toupper(k)
+}
+
+fetch_all <- function() {
+  # Some Thentia tenants return everything for keyword=all; others (including
+  # Nevada's) return an empty set for it. Try "all" first, then fall back to
+  # sweeping a-z — every name contains at least one letter — and dedupe.
+  out <- fetch_keyword("all")
+  if (length(out) > 0) {
+    message("  fetched ", length(out), " via keyword=all")
+    return(out)
+  }
+  message("  keyword=all returned nothing; sweeping a-z instead")
+  seen <- character(0)
+  for (letter in letters) {
+    batch <- fetch_keyword(letter)
+    fresh <- 0
+    for (rec in batch) {
+      k <- rec_key(rec)
+      if (!(k %in% seen)) {
+        seen <- c(seen, k)
+        out <- c(out, list(rec))
+        fresh <- fresh + 1
+      }
+    }
+    message("  keyword=", letter, ": ", length(batch),
+            " records (", fresh, " new, total ", length(out), ")")
+    Sys.sleep(0.5)
   }
   out
 }
@@ -114,9 +150,30 @@ probe <- function() {
     return(invisible(NULL))
   }
   batch <- extract_batch(data)
-  message("Endpoint is LIVE. First record keys:")
-  target <- if (length(batch) > 0) batch[[1]] else data
-  cat(substr(toJSON(target, auto_unbox = TRUE, pretty = TRUE), 1, 1500), "\n")
+  if (length(batch) == 0) {
+    message("Endpoint is LIVE but keyword=all returns nothing on this tenant.")
+    message("Trying keyword=s to sample a real record...\n")
+    data <- tryCatch(
+      get_json(sprintf("%s?keyword=s&skip=0&take=2&lang=en", SEARCH)),
+      error = function(e) e)
+    if (inherits(data, "error")) {
+      message("Sample query failed too: ", conditionMessage(data))
+      return(invisible(NULL))
+    }
+    batch <- extract_batch(data)
+    if (length(batch) == 0) {
+      message("Still empty — the search likely needs different parameters.\n",
+        "Open ", BASE, "/webs/portal/register/#/ in Chrome, press F12 ->\n",
+        "Network -> Fetch/XHR, run a search on the page, and copy the URL\n",
+        "of the request that returns licensee JSON into SEARCH above.")
+      return(invisible(NULL))
+    }
+    message("Sample worked — main() will sweep a-z automatically.")
+  } else {
+    message("Endpoint is LIVE. First record keys:")
+  }
+  cat(substr(toJSON(batch[[1]], auto_unbox = TRUE, pretty = TRUE), 1, 1500),
+      "\n")
 }
 
 main <- function() {
