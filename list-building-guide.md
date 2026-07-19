@@ -5,11 +5,15 @@ insurance-billing chiropractor in Nevada (~645 licensed DCs total). This is the
 fuel for the outbound kit. Build it once, keep it current, work it forever.
 
 **Files in this folder:**
-- `pull_nppes.py` — pulls the raw statewide list from the federal registry
-- `pull_nv_board.py` — scrapes the NV Board's public licensee register (Thentia portal)
-- `merge_lists.py` — folds Board license status into the master list automatically
+- `pull_nppes.R` — pulls the raw statewide list from the federal registry
+- `pull_nv_board.R` — scrapes the NV Board's public licensee register (Thentia portal)
+- `merge_lists.R` — folds Board license status into the master list automatically
 - `nv-chiropractor-list.csv` — the working spreadsheet (template + 2 example rows)
 - `outbound-kit.md` / `founding-client-offer.md` — what you do with the list
+- (`pull_nppes.py` / `pull_nv_board.py` / `merge_lists.py` — identical Python
+  versions, if you ever prefer them; the R scripts are the primary path)
+
+One-time R setup: `install.packages(c("httr", "jsonlite"))`
 
 ---
 
@@ -33,7 +37,7 @@ NPPES is the free federal provider registry. Taxonomy `111N00000X` = Chiropracto
 **Easiest (no code):** go to https://npiregistry.cms.hhs.gov/search, set
 Taxonomy = "Chiropractor", State = NV, run it, and export the results to CSV.
 
-**Repeatable (script):** run `python3 pull_nppes.py` from this folder. It pages
+**Repeatable (script):** run `Rscript pull_nppes.R` from this folder. It pages
 through the API, tags each record by segment (Clark / Washoe / Other NV), and
 writes `nv-chiropractor-list.csv` in the exact column format below. Re-run it
 monthly to catch new providers — NPPES updates weekly.
@@ -49,12 +53,12 @@ that's Steps 2–4.
 
 The Board's current public register lives on a Thentia Cloud portal
 (nvcpbn.portalus.thentiacloud.net/webs/portal/register/#/). It's a JavaScript
-app, but its data comes from a public JSON API — `pull_nv_board.py` pages
+app, but its data comes from a public JSON API — `pull_nv_board.R` pages
 through that API and writes `nv-board-licensees.csv`.
 
 ```
-python3 pull_nv_board.py        # scrape the register (--probe to diagnose)
-python3 merge_lists.py          # fold license status into the master list
+Rscript pull_nv_board.R         # scrape the register (--probe to diagnose)
+Rscript merge_lists.R           # fold license status into the master list
 ```
 
 The merge fills `License_Status` on every matched row, tags license numbers in
@@ -149,15 +153,15 @@ These columns line up with the tracking fields in `outbound-kit.md` §7 and the
   Chiropractic Association endorses you.
 - **De-dupe on NPI**, then on Clinic_Name — several DCs can share one clinic;
   decide whether you target the practice once or each DC.
-- **Keep it current.** Re-run `pull_nppes.py` monthly; new providers = new
+- **Keep it current.** Re-run `pull_nppes.R` monthly; new providers = new
   first-touch opportunities.
 
 ---
 
 ## The 3-hour weekend that starts everything
 
-1. Run `pull_nppes.py` (or export from the NPPES site) → full statewide backbone.
-2. Run `pull_nv_board.py` then `merge_lists.py` → license-verified list.
+1. Run `Rscript pull_nppes.R` (or export from the NPPES site) → full statewide backbone.
+2. Run `Rscript pull_nv_board.R` then `Rscript merge_lists.R` → license-verified list.
 3. Filter to Clark + Washoe insurance-billing candidates.
 4. Enrich the top **30** (email, website, LinkedIn) → mark them Priority A.
 5. Open `outbound-kit.md` and send Monday's first batch.
