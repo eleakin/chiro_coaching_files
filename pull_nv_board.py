@@ -41,16 +41,24 @@ HEADERS = {
 }
 
 # Thentia field names vary slightly per board; every observed variant is listed.
-# probe mode prints the actual keys so you can extend these if needed.
+# The REGISTER_PROFILE_LABEL_* names are Nevada's columnLayout labels, applied
+# when the API returns positional rows (see extract_batch).
 FIELD_MAP = {
-    "last":    ["lastName", "last_name", "surname"],
-    "first":   ["firstName", "first_name", "givenName"],
-    "license": ["licenseNumber", "license_number", "registrationNumber", "licenceNumber"],
-    "status":  ["status", "licenseStatus", "registrationStatus"],
-    "type":    ["licenseType", "license_type", "registrationType", "profession"],
-    "city":    ["city", "addressCity", "practiceCity"],
+    "last":    ["REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name",
+                "surname"],
+    "first":   ["REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName", "first_name",
+                "givenName"],
+    "license": ["REGISTER_PROFILE_LABEL_LICENSE_NUMBER", "licenseNumber",
+                "license_number", "registrationNumber", "licenceNumber"],
+    "status":  ["REGISTER_PROFILE_LABEL_LICENSE_STATUS", "status",
+                "licenseStatus", "registrationStatus"],
+    "type":    ["REGISTER_PROFILE_LABEL_LICENSE_TYPE", "licenseType",
+                "license_type", "registrationType", "profession"],
+    "city":    ["REGISTER_PROFILE_LABEL_CITY", "city", "addressCity",
+                "practiceCity"],
     "state":   ["state", "province", "addressState"],
-    "expiry":  ["expiryDate", "expirationDate", "expiry"],
+    "expiry":  ["REGISTER_PROFILE_LABEL_LICENSE_EXPIRY_DATE", "expiryDate",
+                "expirationDate", "expiry"],
     "id":      ["id", "profileId", "entityId"],
 }
 
@@ -70,9 +78,26 @@ def pick(rec, keys):
 
 
 def extract_batch(data):
-    # Thentia responses are either a bare list or {"result": [...], "resultCount": N}
-    return data if isinstance(data, list) else (
-        data.get("result") or data.get("results") or data.get("data") or [])
+    """Normalize the three Thentia response shapes to a list of keyed records:
+    a bare list, {"result": [...]}, or (Nevada's) {"result": {"dataResults":
+    [...], "columnLayout": [...]}} where rows are positional arrays."""
+    if isinstance(data, list):
+        return data
+    res = data.get("result")
+    if isinstance(res, dict) and "dataResults" in res:
+        layout = res.get("columnLayout") or []
+        out = []
+        for row in res.get("dataResults") or []:
+            if isinstance(row, dict):
+                out.append(row)
+            elif isinstance(row, list) and len(row) == len(layout):
+                out.append({k: ("" if v is None else v)
+                            for k, v in zip(layout, row)})
+            else:
+                out.append(row)
+        return out
+    return data.get("results") or data.get("data") or (
+        res if isinstance(res, list) else [])
 
 
 def fetch_keyword(keyword):

@@ -38,17 +38,24 @@ HEADERS <- add_headers(
 )
 
 # Thentia field names vary slightly per board; every observed variant listed.
-# --probe prints the actual keys so you can extend these if needed.
+# The REGISTER_PROFILE_LABEL_* names are Nevada's columnLayout labels, applied
+# when the API returns positional rows (see extract_batch).
 FIELD_MAP <- list(
-  last    = c("lastName", "last_name", "surname"),
-  first   = c("firstName", "first_name", "givenName"),
-  license = c("licenseNumber", "license_number", "registrationNumber",
-              "licenceNumber"),
-  status  = c("status", "licenseStatus", "registrationStatus"),
-  type    = c("licenseType", "license_type", "registrationType", "profession"),
-  city    = c("city", "addressCity", "practiceCity"),
+  last    = c("REGISTER_PROFILE_LABEL_LAST_NAME", "lastName", "last_name",
+              "surname"),
+  first   = c("REGISTER_PROFILE_LABEL_FIRST_NAME", "firstName", "first_name",
+              "givenName"),
+  license = c("REGISTER_PROFILE_LABEL_LICENSE_NUMBER", "licenseNumber",
+              "license_number", "registrationNumber", "licenceNumber"),
+  status  = c("REGISTER_PROFILE_LABEL_LICENSE_STATUS", "status",
+              "licenseStatus", "registrationStatus"),
+  type    = c("REGISTER_PROFILE_LABEL_LICENSE_TYPE", "licenseType",
+              "license_type", "registrationType", "profession"),
+  city    = c("REGISTER_PROFILE_LABEL_CITY", "city", "addressCity",
+              "practiceCity"),
   state   = c("state", "province", "addressState"),
-  expiry  = c("expiryDate", "expirationDate", "expiry"),
+  expiry  = c("REGISTER_PROFILE_LABEL_LICENSE_EXPIRY_DATE", "expiryDate",
+              "expirationDate", "expiry"),
   id      = c("id", "profileId", "entityId")
 )
 
@@ -68,9 +75,23 @@ get_json <- function(url) {
            simplifyVector = FALSE)
 }
 
-# Thentia responses are either a bare list or {result: [...], resultCount: N}
+# Thentia responses come in three shapes: a bare list of records,
+# {result: [...]}, or (Nevada's) {result: {dataResults: [...],
+# columnLayout: [...]}} where each row is a positional array aligned to
+# columnLayout. Normalize all three to a list of keyed records.
 extract_batch <- function(data) {
   if (is.null(names(data))) return(data)              # bare list of records
+  res <- data$result
+  if (!is.null(res) && !is.null(names(res)) && !is.null(res$dataResults)) {
+    layout <- unlist(res$columnLayout)
+    return(lapply(res$dataResults, function(row) {
+      if (!is.null(names(row))) return(row)           # already keyed
+      row <- lapply(row, function(v) if (is.null(v)) "" else v)
+      if (!is.null(layout) && length(row) == length(layout))
+        return(setNames(row, layout))
+      row
+    }))
+  }
   for (k in c("result", "results", "data")) {
     if (!is.null(data[[k]])) return(data[[k]])
   }
