@@ -580,59 +580,59 @@ Priority,DC_LastName,DC_FirstName,Clinic_Name,City,County,State,Practice_Address
 ,TAYLOR,WADE,,ELKO,,NV,1810 PINION RD,89801,775-753-7387,,,,1083779458,Active,,,Other NV,,NPPES,,,,,,,,,,,NV lic #B01008
 ,WARD,DEAN,,ELKO,,NV,445 5TH ST,89801,775-777-7066,,,,1780882035,Active,,,Other NV,,NPPES,,,,,,,,,,,NV lic #B00331
 ,WENDELL,TODD,,ELKO,,NV,618 IDAHO ST,89801,775-777-3033,,,,1508814328,Active,,,Other NV,,NPPES,,,,,,,,,,,NV lic #B01082
-C,ALLEN,MILO,,RENO,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01508
-C,BARCHENGER,MIKAL,,LAS VEGAS,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00284
-C,CISSELL,WAYNE,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01516
-C,DIORIO-PHILLIPS,JAIME,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00888
+,ALLEN,MILO,Boost Integrated Medical Center,RENO,,NV,"6165 Ridgeview Ct Ste A & E, Reno, NV 89519",,775-525-5624,,https://www.boostnevada.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01508; web-enriched (high)
+C,BARCHENGER,MIKAL,,LAS VEGAS,,NV,"5650 W Flamingo Rd #A, Las Vegas, NV 89103",,866-871-3420,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00284; web-enriched (MEDIUM - verify)
+,CISSELL,WAYNE,Reno Pain Relief Chiropractic,Reno,,NV,"6421 S Virginia St, Reno, NV 89511",,775-636-0540,,https://renobackpainchiropractic.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01516; web-enriched (high)
+,DIORIO-PHILLIPS,JAIME,The Spine Center,Las Vegas,,NV,"7380 W Sahara Ave Ste 100, Las Vegas, NV 89117",,702-252-7246,,https://www.spinecenterlv.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00888; web-enriched (high)
 C,DUMLER II,DENNIS,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00678
-C,FINE,JEFFREY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00449
-C,FRANCIS,TIMOTHY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00309
-C,FREEMAN,DANIEL,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01883
+,FINE,JEFFREY,Chiropractic Physicians of Las Vegas (Fine Chiropractic Center),Las Vegas,,NV,"6085 W. Twain Ave., Suite 201, Las Vegas, NV 89103",,702-368-3463,,https://www.finechiropractic.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00449; web-enriched (high)
+,FRANCIS,TIMOTHY,Chiropractic Kinesiology,Las Vegas,,NV,"7473 W Lake Mead Blvd, Las Vegas, NV 89128",,702-221-8870,,https://drtimothyfrancis.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00309; web-enriched (high)
+,FREEMAN,DANIEL,"Crafted Wellness & Sports Rehab (Daniel Freeman, DC)",Henderson,,NV,"880 Seven Hills Dr, Ste 210, Henderson, NV 89052",,725-219-0676,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01883; web-enriched (high)
 C,KIPLING,SCOTT,,carson city,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00382
-C,MILMAN,MICHAEL,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01618
-C,ODUNUGA,FIDEL,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01519
-C,OLIVARES,JULIO,,LAS VEGAS,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00747
-C,"OVERLAND, JR.",JAMES,,LAS VEGAS,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01801
-C,"OVERLAND, SR.",JAMES,,North Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00527
-C,"OWENS, JR.",ROBERT,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01800
-C,PEACOCK,SHANNON,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01781
-C,REDD,JOSHUA,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01636
+,MILMAN,MICHAEL,The Joint Chiropractic - Tropicana Beltway,Las Vegas,,NV,"5060 S Fort Apache Rd Ste 100, Las Vegas, NV 89148",,,,https://www.thejoint.com/nevada/las-vegas/tropicana-beltway-36009,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01618; web-enriched (high)
+,ODUNUGA,FIDEL,HALO Wellness Clinic,Las Vegas,,NV,"5920 S Rainbow Blvd Ste 5, Las Vegas, NV 89118",,702-917-1716,,https://halochiro.org,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01519; web-enriched (high)
+,OLIVARES,JULIO,The Neck and Back Clinics,LAS VEGAS,,NV,,,702-644-3333,,https://theneckandbackclinics.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00747; web-enriched (high)
+,"OVERLAND, JR.",JAMES,"Complete Care Injury Center (James T Overland Jr, DC)",LAS VEGAS,,NV,"55 S Valle Verde Dr Ste 450, Henderson, NV 89012",,702-614-9500,,https://www.completecare.org,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01801; web-enriched (high)
+,"OVERLAND, SR.",JAMES,Preferred Chiropractic,North Las Vegas,,NV,"2700 E Lake Mead Blvd, Ste 10, North Las Vegas, NV 89030",,702-399-6655,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00527; web-enriched (high)
+,"OWENS, JR.",ROBERT,,Las Vegas,,NV,"8678 Spring Mountain Rd Ste 130, Las Vegas, NV 89117",,702-384-0000,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01800; web-enriched (high)
+,PEACOCK,SHANNON,Day Chiropractic,Reno,,NV,"7689 S Virginia St Ste Q, Reno, NV 89511",,775-853-3343,,https://daychiro.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01781; web-enriched (high)
+,REDD,JOSHUA,RedRiver Health and Wellness Center of NV,Henderson,,NV,"8935 S Pecos Rd, Suite 21B, Henderson, NV 89074",,702-367-3600,,https://www.redriverhealthandwellness.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01636; web-enriched (high)
 C,"ROSSI, JR.",ARTHUR,,"Las Vegas, NV 89118",,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01079
 C,WALKER,MICHELLE,,St. Louis,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01038
-C,WYATT,BRADY,,RENO,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01818
+,WYATT,BRADY,The Joint Chiropractic - South Meadows,RENO,,NV,"537 S. Meadows Parkway, Suite 110, Reno, NV 89521",,775-571-6697,,https://www.thejoint.com/nevada/reno/south-meadows-36015,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01818; web-enriched (high)
 C,ACREE,WILLIAM,,Fort Dodge,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00872
 C,ALEGRIA,CHRISTOPHER,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01815
 C,ALTFELD,DYLAN,,Aiea,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02095
-C,ANASTASSIOU,CONSTANTINO,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01339
+,ANASTASSIOU,CONSTANTINO,Holistic Synergy,Las Vegas,,NV,"7501 W Lake Mead Blvd Ste 114, Las Vegas, NV 89128",,702-240-0012,,https://constantinoanastassioudc.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01339; web-enriched (high)
 C,ANDERSON,RUSSELL,,Prineville,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00866
-C,ANDERSON,ROBERT,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01923
-C,APGAR,BRENT,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01787
+,ANDERSON,ROBERT,Anderson Chiropractic,Las Vegas,,NV,"2610 S Jones Blvd, Las Vegas, NV 89146",,720-628-2604,,https://andersonchiropracticdenver.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01923; web-enriched (high)
+,APGAR,BRENT,Spinal Rehabilitation Center (Henderson),Las Vegas,,NV,"100 N. Green Valley Pkwy, Suite 140, Henderson, NV 89074",,702-776-8100,,https://spinalrc.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01787; web-enriched (high)
 C,ASSOURI,MICHAEL,,NORTHRIDGE,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02070
 C,Abbott,Claudia,,Miami,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02052
-C,BACKUS,MATHIAS,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01993
+,BACKUS,MATHIAS,"The Pain Clinic, Inc.",Las Vegas,,NV,"5445 W Sahara Ave, Las Vegas, NV 89146",,702-368-0508,,https://www.painclinic-lv.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01993; web-enriched (high)
 C,BAKER,MARYANN,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01847
-C,BALLE,PETER-MARIO,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00862
-C,BALLE,EDWARD,,las vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00959
+C,BALLE,PETER-MARIO,"Peter-Mario Balle, DC (now Balle Management consulting)",Las Vegas,,NV,"2619 W Charleston Blvd, Las Vegas, NV 89102",,702-878-8867,,https://www.ballemanagement.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00862; web-enriched (MEDIUM - verify)
+C,BALLE,EDWARD,Balle Chiropractic,las vegas,,NV,"2621 W Charleston Blvd, Las Vegas, NV 89102",,702-450-2225,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00959; web-enriched (MEDIUM - verify)
 C,BANES,HOLLI,,Murrieta,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01573
 C,BANES,STEPHEN,,Murrieta,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01641
-C,BARNETT,KATHLEEN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00960
+,BARNETT,KATHLEEN,Vitality Family Chiropractic,Las Vegas,,NV,"1171 S Buffalo Dr Ste 100, Las Vegas, NV 89117",,702-425-9998,,https://www.chirovitalitylv.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00960; web-enriched (high)
 C,BARNETT,RYAN,,Chicago,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02155
 C,BATEMAN,LESLIE,,Glendale,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02156
-C,BAUER,JASON,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01712
-C,BENTLEY,MATTHEW,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02028
-C,BERTUCCINI,JOHN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00672
-C,BEYER,THOMAS,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01210
+,BAUER,JASON,20/20 ChiroYoga / RejuveN8 (Dr. Jason Bauer),Las Vegas,,NV,"7160 Rafael Rivera Way, Suite 325, Las Vegas, NV 89113",,702-430-8099,,https://www.rejuven8center.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01712; web-enriched (high)
+,BENTLEY,MATTHEW,The Joint Chiropractic - Montecito Marketplace,Las Vegas,,NV,"7120 N. Durango Dr, Suite 170, Las Vegas, NV 89149",,702-979-7745,,https://www.thejoint.com/nevada/las-vegas/montecito-marketplace-36001,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B02028; web-enriched (high)
+,BERTUCCINI,JOHN,Atlas Chiropractic,Las Vegas,,NV,"3250 N Tenaya Way, Ste 102, Las Vegas, NV 89129",,702-655-4065,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00672; web-enriched (high)
+,BEYER,THOMAS,Wellsprings Chiropractic,Reno,,NV,"1150 Selmi Dr Suite 502, Reno, NV 89512",,775-219-6708,,https://wellspringschiropractic.us/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01210; web-enriched (high)
 C,BISHOP,JENNIFER,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01350
 C,BLAN,TODD,,San Antonio,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02141
-C,"BLANCHARD, JR.",ALBERT,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01319
+,"BLANCHARD, JR.",ALBERT,Doctor's Health Network (Excelsia Injury Care),Las Vegas,,NV,"241 N Buffalo Dr Ste 100, Las Vegas, NV 89145",,702-990-2225,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01319; web-enriched (high)
 C,BODENSTEINER,JILL,,Estes Park,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02154
 C,BORSELLI-WONG,KIM,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00492
 C,BOWERS,RENNES,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01917
 C,BOWMAN,MATTHEW,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02062
-C,BOX,RACHAEL,,HENDERSON,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01740
+,BOX,RACHAEL,Golan Integrated Physical Medicine / Advanced Spine and Posture,HENDERSON,,NV,"321 N Pecos Rd, Suite 200, Henderson, NV 89074",,702-263-4925,,https://myhendersonchiropractic.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01740; web-enriched (high)
 C,BRAMBLETT,JAMES,,San Antonio,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01840
 C,"BRAY, JR.",WILLIAM,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00357
-C,BROWN,BRET,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01639
+,BROWN,BRET,"Mountain West Chiropractic, LLC",Las Vegas,,NV,"9034 W Sahara Ave, Las Vegas, NV 89117",,702-256-8686,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01639; web-enriched (high)
 C,"BROWN, IV",JOHN,,N Las Vegas,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01612
 C,BURNETT,NICHOLAS,,Las Vegs,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02101
 C,BUTORAC,GEORGE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01477
@@ -641,56 +641,56 @@ C,CARPENTER,THOMAS,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,
 C,CASTRO,SANDRA,,Encinitas,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01889
 C,CHEONG,BILLY,,Houston,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02103
 C,CHOU,SHAWN,,Palm Bay,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02123
-C,COCKS,DANIEL,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01320
+,COCKS,DANIEL,The Joint Chiropractic,Henderson,,NV,"1311 W Sunset Rd, Ste 105, Henderson, NV 89014",,,,https://www.thejoint.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01320; web-enriched (high)
 C,COHEN,PETER,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01819
-C,COLGIN,CHRISTOPHER,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01965
+,COLGIN,CHRISTOPHER,Optimal Health Members (Elite Chiropractic & Pain Relief),Las Vegas,,NV,"8540 S Eastern Ave Suite 210, Las Vegas, NV 89123",,702-541-9060,,https://optimalhealthmembers.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01965; web-enriched (high)
 C,COLLETTE,KELLY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01352
 C,COOK,DAVID,,Hurricane,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01834
-C,COOPER,KEVIN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01395
+,COOPER,KEVIN,The Joint Chiropractic - Eastern and Richmar,Las Vegas,,NV,"9500 S Eastern Ave, Suite 120, Las Vegas, NV 89123",,702-430-7361,,https://www.thejoint.com/nevada/las-vegas/eastern-and-richmar-36005,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01395; web-enriched (high)
 C,CORNELSON,STACEY,,Bloomington,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01977
-C,CORRAL,JAVIER,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B00694
+,CORRAL,JAVIER,Javier Corral Chiropractic Clinic,Reno,,NV,"708 N Center St Ste 100, Reno, NV 89501",,775-322-2828,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B00694; web-enriched (high)
 C,COUTURE,LOREN,,San Diego,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02133
 C,COVA,TANYA,,Irvine,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02104
-C,"DECKER, III",LLOYD,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01654
+,"DECKER, III",LLOYD,Reno Regenerative Medicine,Reno,,NV,"730 Sandhill Rd, Ste 120, Reno, NV 89521",,775-234-2361,,https://www.renoregen.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01654; web-enriched (high)
 C,DELEON,DINA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02098
-C,DEMINT,JENEKA,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01758
+,DEMINT,JENEKA,Kindred Care Chiropractic,Reno,,NV,"5301 Longley Ln Suite H124, Reno, NV 89511",,775-386-2752,,https://kindredcarechiro.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01758; web-enriched (high)
 C,DEVLIN,LISA,,Sunnyvale,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01253
-C,DEXTER,ROGER,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01586
+,DEXTER,ROGER,Spinal Rehabilitation Center (Northeast) / Dexter Chiropractic,Las Vegas,,NV,"4416 E Bonanza Rd Ste 150, Las Vegas, NV 89110",,702-431-8100,,https://spinalrc.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01586; web-enriched (high)
 C,DIAMOND,SCOTT,,Boston,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02077
 C,DICKMAN,ROBERT,,El Dorado Hills,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00806
 C,DILANCHIAN,HENRIK,,Glendale,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02144
 C,DINEHART,ALAN,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00142
-C,DONOFRIO,CHARLES,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00963
+,DONOFRIO,CHARLES,The Joint Chiropractic - Pebble Marketplace (Dr. Rusty/Charles Donofrio),Henderson,,NV,"1000 N. Green Valley Marketplace, Suite 230, Henderson, NV 89074",,702-919-7254,,https://www.thejoint.com/nevada/henderson/pebble-marketplace-36008,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00963; web-enriched (high)
 C,DROBBIN,DOUGLAS,,NORTH BELLMORE,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02063
 C,DUEMLING,DAVID,,Wilsonville,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02087
 C,DUMBADSE,CHRISTOPHER,,Verdi,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01790
 C,EDWARDS,LONNEY,,Fresno,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02066
 C,ELLINGSON,PATRICIA,,San Diego,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01986
-C,FABER,MELODY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00829
+C,FABER,MELODY,,Las Vegas,,NV,"5560 Ashley Creek St, Las Vegas, NV 89135",,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00829; web-enriched (MEDIUM - verify)
 C,FARIAS,HERNAN,,Leeâs Summit,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02096
 C,FEHER,SONDRA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01454
 C,FERNANDEZ,JOHN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01768
 C,FINKLE,HARLEY,,Lake Havasu City,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01311
 C,FITZSIMMONS,MICHAEL,,Southlake,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02075
-C,FOWLER,DAVID,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01972
-C,FRANCIS,ELROY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01014
+,FOWLER,DAVID,Luxiam Chiropractic,Reno,,NV,"6815 Sierra Center Pkwy Suite 250, Reno, NV 89511",,775-900-7849,,https://www.luxiamchiropractic.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01972; web-enriched (high)
+,FRANCIS,ELROY,"Francis Chiropractic, P.C.",Las Vegas,,NV,"601 S Rancho Dr Ste B-16, Las Vegas, NV 89106",,702-431-3800,,http://francischiropractic.org,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01014; web-enriched (high)
 C,FRANCISCO,JENNIFER,,N. LAS VEGAS,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01813
 C,FUQUA,WHITNEY,,MARIETTA,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02072
-C,GARCIA,BREAGAN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01531
+,GARCIA,BREAGAN,Complete Care 3.0,Las Vegas,,NV,"3935 S Durango Dr, Suite C1, Las Vegas, NV 89147",,702-870-2007,,https://completecare3.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01531; web-enriched (high)
 C,GARRETT,JASON,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01896
-C,GERLEMAN,STEVEN,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00276
+C,GERLEMAN,STEVEN,,Henderson,,NV,"140 Red Coral Dr, Henderson, NV 89002",,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00276; web-enriched (MEDIUM - verify)
 C,GERMEN,JENNIFER,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00925
 C,GIANETTI,LINDA,,Vancouver,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02138
 C,GLAUDINI,BRIAN,,MURRIETA,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02064
 C,GRAFF,WHITNEY,,ASHEVILLE,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01999
 C,GRANT,KEITH,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02065
 C,GRIFFIN,JUSTIN,,Greenville,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02145
-C,HAAKENSON,JAMES,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01950
+,HAAKENSON,JAMES,Ascension Health (Joint and Back Pain Clinic),Reno,,NV,"415 Highway 95A, Ste E-503, Fernley, NV 89408",,775-575-9922,,https://ascensionhealthnv.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01950; web-enriched (high)
 C,HAMILTON,SAMUEL,,Paris,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02162
-C,HAMON,MONIQUE,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01911
+,HAMON,MONIQUE,Monique Hamon DC (Mobile Chiropractor),Henderson,,NV,,,,,https://moniquehamondc.simplybook.me/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01911; web-enriched (high)
 C,HANSEN,WAYNE,,Taylorsville,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02116
-C,HARBISON,KRISTINA,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01968
-C,"HARRIS, JR.",EDWIN,,henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01167
+,HARBISON,KRISTINA,Doctors Harbison PLLC / Spinal Rehabilitation Center,Las Vegas,,NV,"2626 S Rainbow Blvd Ste 109, Las Vegas, NV 89146",,702-675-4500,,https://spinalrc.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01968; web-enriched (high)
+,"HARRIS, JR.",EDWIN,Horizon Ridge Chiropractic (Harris Chiropractic Clinic),henderson,,NV,"1770 W Horizon Ridge Pkwy, Suite 130, Henderson, NV 89012",,702-617-3330,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01167; web-enriched (high)
 C,HARRISON,JOHN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01811
 C,HASHIMOTO,NAOTA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02102
 C,HASHIMOTO,NORA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02135
@@ -701,11 +701,11 @@ C,HELO,VICTOR,,Studio City,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,
 C,HERBST,CASSANDRA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02134
 C,HESHMAT,LETITIA,,San Joes,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02059
 C,HIGHTOWER,BEAU,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01814
-C,HINDS,DEXTER,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01809
-C,HOLLINGSWORTH,TREVOR,,reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B02042
+,HINDS,DEXTER,Spinal Rehabilitation Center - Sahara,Las Vegas,,NV,"4225 E Sahara Ave Suite 11 & 12, Las Vegas, NV 89104",,,,https://spinalrc.com/locations/sahara/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01809; web-enriched (high)
+,HOLLINGSWORTH,TREVOR,The Joint Chiropractic (Kietzke - Reno),reno,,NV,"6395 S McCarran Blvd Ste C, Reno, NV 89509",,775-773-4019,,https://www.thejoint.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B02042; web-enriched (high)
 C,HOOK-PENCE,ASHLEY,,Buffalo,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02083
 C,HUANG,KERRY,,Santa Clara,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02106
-C,HUBBARD,SPENCER,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01777
+,HUBBARD,SPENCER,Nevada Rehabilitation Centers (Ian K Yamane DC PC),Las Vegas,,NV,"2851 N Tenaya Way, Suite 103, Las Vegas, NV 89128",,702-309-4878,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01777; web-enriched (high)
 C,HUI,STUART,,Elgin,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01953
 C,HULTS,IVAGENE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00470
 C,HURLEY,PATRICIA,,Fair Oaks,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02114
@@ -723,18 +723,18 @@ C,KIM,PATRICK,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV 
 C,KIM,CHRIS,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01273
 C,KING,MORGAN,,Columbus,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02079
 C,KOHANOFF,SIMON,,Canoga Park,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02153
-C,KOURY,SHADIA,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00843
-C,KRAMER,SCOTT,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01540
+,KOURY,SHADIA,Chiropractic For Life,Las Vegas,,NV,"7455 W Azure Dr Ste 120, Las Vegas, NV 89130",,702-567-5433,,https://chiropracticforlife.org/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00843; web-enriched (high)
+,KRAMER,SCOTT,Upper Cervical Chiropractic of Las Vegas,Las Vegas,,NV,"9550 S Eastern Ave Ste 208, Las Vegas, NV 89123",,702-202-0808,,https://uppercervicalchiropracticlv.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01540; web-enriched (high)
 C,KREMER,AMANDA,,Camas,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02113
 C,KRIVITSKY,VALENTIN,,Sacramento,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02112
-C,KUBINEC,JAMES,,Sparks,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B00742
+C,KUBINEC,JAMES,,Sparks,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B00742; web-enriched (MEDIUM - verify)
 C,KWAN,KELLIE,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01966
 C,KWON,BRIAN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01590
 C,King,Alexander,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02147
-C,LANDGRAF,LAURA,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01901
+,LANDGRAF,LAURA,Landgraf Chiropractic (Dr. Laura Chiropractic),Reno,,NV,"10655 Professional Circle Suite A, Reno, NV 89521",,775-362-1234,,https://www.drlaurachiropractic.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01901; web-enriched (high)
 C,LAWRENCE,JANET,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00663
 C,LEICHTFUSS,RENEE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01846
-C,LELKE,JOHANNA,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01900
+,LELKE,JOHANNA,Onsight Reno Performance & Wellness (Onsight Chiropractic),Reno,,NV,"180 W Huffaker Ln, Suite 305, Reno, NV 89511",,775-234-2141,,https://www.onsightreno.com/,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01900; web-enriched (high)
 C,LEONE,NICOLETTE,,Scottsdale,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02161
 C,LESKO,MARK,,Austin,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02056
 C,LEWIS,WILLIAM,,Nixa,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02086
@@ -749,91 +749,91 @@ C,MABALAY,ZACHARY,,Vancouver,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,
 C,MACKES,JOEL,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02118
 C,MANKOWSKI,ALEXANDER,,Los Angeles,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02076
 C,MANNING,CRAIG J,,Twin Falls,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02127
-C,MARSHALL,LOREN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01382
+,MARSHALL,LOREN,Marshall Chiropractic,Las Vegas,,NV,"1913 N Green Valley Pkwy Ste C, Henderson, NV 89074",,702-900-7665,,https://imovewell.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01382; web-enriched (high)
 C,MASSEY,MICHAEL,,Athens,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01897
 C,MATSUDA,ERIC,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00618
 C,MCBRIDE,JACOB,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02160
-C,MEDINA TREVINO,ANTONIO,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02057
+,MEDINA TREVINO,ANTONIO,Precision Chiropractic Care Group,Las Vegas,,NV,"7541 Tule Springs Rd Ste 130, Las Vegas, NV 89131",,702-722-2622,,https://www.pccgroupnv.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B02057; web-enriched (high)
 C,MEDINA TREVINO,ROBERTO,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01794
 C,MENCHHOFER,KRISTEN,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01854
-C,MENNEN,AUSTIN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01979
+,MENNEN,AUSTIN,Elevate Sports Performance & Healthcare,Las Vegas,,NV,"6658 W Sunset Rd, Suite 170, Las Vegas, NV 89118",,702-558-2151,,https://elevatesph.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01979; web-enriched (high)
 C,MERCER,SUZANNE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01865
 C,MILLAR,MICHAEL,,Newport Coast,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01789
-C,MILLER,RHONDA,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01932
+,MILLER,RHONDA,The Joint Chiropractic - Tropicana Beltway,Las Vegas,,NV,"5060 S Fort Apache Rd #100, Las Vegas, NV 89148",,702-872-3353,,https://www.thejoint.com/nevada/las-vegas/tropicana-beltway-36009,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01932; web-enriched (high)
 C,MOLL,ERIK,,San Antonio,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01887
 C,MORRIS,JERRY,,Elko,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02050
 C,MURIE,ADAM,,"Hurricane, UT",,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01447
 C,"MURIE, JR.",KELLY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01092
 C,MURPHY,MICHAEL,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01190
-C,MYERSON,JAMES,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B02048
-C,McELVANY,DAVID,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00727
+C,MYERSON,JAMES,The Joint Chiropractic,Reno,,NV,,,,,https://www.thejoint.com/chiropractor/james-myerson-dc,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B02048; web-enriched (MEDIUM - verify)
+,McELVANY,DAVID,,Las Vegas,,NV,"1735 N Nellis Blvd Suite F, Las Vegas, NV 89115",,702-998-6740,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00727; web-enriched (high)
 C,McKIVIGAN,JAMES,,N. Las Vegas,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01091
 C,NACCARATO,ANTHONY (TONY),,Carson city,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01927
-C,NALBONE,JOSEPH,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01442
-C,NAMIMATSU,SAUNDRA,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01242
+C,NALBONE,JOSEPH,The Joint Chiropractic (Las Vegas),Las Vegas,,NV,"9500 S Eastern Ave Ste 120, Las Vegas, NV 89123",,,,https://www.thejoint.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01442; web-enriched (MEDIUM - verify)
+C,NAMIMATSU,SAUNDRA,Back in Balance Chiropractic (listed permanently closed),Las Vegas,,NV,"7730 W Sahara Ave, Suite 109, Las Vegas, NV 89117",,702-567-9000,,http://www.biblv.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01242; web-enriched (MEDIUM - verify)
 C,NAVERAN,GARRETT,,Post Falls,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02163
-C,NEGRON ZAYAS,RAUL,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02053
+,NEGRON ZAYAS,RAUL,The Joint Chiropractic - Summerlin,Las Vegas,,NV,"10220 W. Charleston Blvd, Suite 2, Las Vegas, NV 89135",,702-425-1736,,https://www.thejoint.com/nevada/las-vegas/summerlin-36002,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B02053; web-enriched (high)
 C,NEHRING,MICHAEL,,Denver,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01982
 C,NOGGLE,ALEXIS,,Dahlonega,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01453
-C,OATES,JULIANNA,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B02019
+,OATES,JULIANNA,The Joint Chiropractic - NW Reno,Reno,,NV,"5110 Mae Anne Ave, Ste 507, Reno, NV 89523",,,,https://www.thejoint.com/nevada/reno/nw-reno-36007,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B02019; web-enriched (high)
 C,ODAHLEN,LUCAS,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01579
-C,OPPERMAN,DAVID,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01904
-C,ORTIZ,ANIBAL,,RENO,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01981
+,OPPERMAN,DAVID,Spinal Rehabilitation Center - Summerlin,Las Vegas,,NV,"911 N Buffalo Dr Suite 101, Las Vegas, NV 89128",,702-629-3900,,https://spinalrc.com/locations/summerlin/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01904; web-enriched (high)
+,ORTIZ,ANIBAL,The Joint Chiropractic (Kietzke - Reno),RENO,,NV,"6395 S McCarran Blvd Ste C, Reno, NV 89509",,775-773-4019,,https://www.thejoint.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01981; web-enriched (high)
 C,PAYAN,ANTHONY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02093
-C,PEHUR,DEREK,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01928
+,PEHUR,DEREK,"20/20 ChiroYoga / RejuveN8 (Dr. Derek Pehur, Lead Chiropractor SW Vegas)",Las Vegas,,NV,"7160 Rafael Rivera Way, Suite 325, Las Vegas, NV 89113",,702-430-8099,,https://www.rejuven8center.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01928; web-enriched (high)
 C,PELLEGRINO,KRISTINA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01853
-C,PIERCE-MANFRA,HAZEL,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00302
-C,PONCE DE LEON,ANTHONY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02024
-C,POOLE,ADAM,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01955
+,PIERCE-MANFRA,HAZEL,Hazel M Pierce-Manfra Chiropractic Clinic (North Eastern Chiropractic),Las Vegas,,NV,"640 N Eastern Ave, Las Vegas, NV 89101",,702-388-0599,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00302; web-enriched (high)
+,PONCE DE LEON,ANTHONY,Align Med,Las Vegas,,NV,"221 N Buffalo Dr, Ste B, Las Vegas, NV 89145",,,,https://myalignmed.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B02024; web-enriched (high)
+,POOLE,ADAM,Align Med,Las Vegas,,NV,"221 N Buffalo Dr Ste B, Las Vegas, NV 89145",,702-702-5446,,https://myalignmed.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01955; web-enriched (high)
 C,POUND,ROBERT,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01888
-C,POURNAJ-MCENTIRE,MANDANA,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B0992
+,POURNAJ-MCENTIRE,MANDANA,Muscle Activation Reno / Reno Orthopedic Massage (Dr. Mandana McEntire),Reno,,NV,"5365 Mae Anne Ave, Suite A-2, Reno, NV 89523",,775-800-1618,,https://www.massagebook.com/Reno~Massage~mandana-mcentire-dc-mat,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B0992; web-enriched (high)
 C,POWELL,VICTOR,,Santa Rosa,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02151
 C,PRICE,MORGAN,,Seattle,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02016
-C,PRIMES,TIKISA,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01225
-C,"PURVIS, III",JAMES,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01751
+C,PRIMES,TIKISA,"Tikisa L. Primes, DC, P.C.",Las Vegas,,NV,"6645 W Tropicana Ave #203, Las Vegas, NV 89103",,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01225; web-enriched (MEDIUM - verify)
+,"PURVIS, III",JAMES,Advanced Spine & Posture (North Las Vegas),Las Vegas,,NV,"6592 N Decatur Blvd, Ste 115, North Las Vegas, NV 89131",,702-396-4993,,https://advancedspineandposture.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01751; web-enriched (high)
 C,Papazian,Marine,,VAN NUYS,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02146
 C,QUAM,ROBERT,,Fallon,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00232
 C,RACE,DANIEL,,Phoenix,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02045
 C,RADABAUGH,KATHERINE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02122
-C,RAMSEY,CALEB,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01582
+,RAMSEY,CALEB,Spinal Rehabilitation Center - Durango,Las Vegas,,NV,"6720 N Durango Dr Suite 160, Las Vegas, NV 89149",,,,https://spinalrc.com/locations/durango/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01582; web-enriched (high)
 C,RHEE,JUSTINE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02030
 C,RICCHIO,GEOFFREY,,TEMECULA,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01980
 C,RIVERA,RICHARD,,Burien,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01035
 C,ROBINSON,ROGER,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01583
-C,ROBIRDS,RANDALL,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00478
+,ROBIRDS,RANDALL,Randall W Robirds Chiropractic Clinic,Las Vegas,,NV,"1201 N Decatur Blvd Ste 109, Las Vegas, NV 89108",,702-646-1150,,https://randallrobirds.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00478; web-enriched (high)
 C,ROHAY,SARAH,,Dallas,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02029
-C,ROLLINS,RONALD,,SPARKS,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01227
-C,ROVETTI,DAVID,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B00317
+C,ROLLINS,RONALD,"The Joint Chiropractic - NW Reno (Dr. King/Ronald Rollins, Clinic Director)",SPARKS,,NV,"5110 Mae Anne Ave., Suite 507, Reno, NV 89523",,775-238-9736,,https://www.thejoint.com/nevada/reno/nw-reno-36007,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01227; web-enriched (MEDIUM - verify)
+,ROVETTI,DAVID,Northwest Reno Chiropractic,Reno,,NV,"5365 Mae Anne Ave Suite B-2, Reno, NV 89512",,775-324-3700,,https://www.northwestrenochiropractic.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B00317; web-enriched (high)
 C,ROWSHAN,HAMID,,santa ana,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02081
 C,ROY,AVERY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02049
 C,RUFF,ASHLEY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01951
 C,RUMACK,KENNETH,,South Lake Tahoe,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00292
 C,RUSHING,KENNETH,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01784
-C,RUSSEAU,RONALD,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01710
+,RUSSEAU,RONALD,The Joint Chiropractic,Las Vegas,,NV,"8820 W Charleston Blvd, Las Vegas, NV 89117",,,,https://www.thejoint.com/chiropractor/ron-russeau-dc,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01710; web-enriched (high)
 C,RYAN,CATHERINE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00850
-C,SABOL,ERIC,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00510
-C,"SALEM, II",JAMES,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00936
-C,SANDNESS JOHNSON,CHEREE,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00906
+,SABOL,ERIC,"Align Med (Dr. Eric Sabol) / Eric L. Sabol, D.C.",Las Vegas,,NV,"6136 W Lake Mead Blvd, Las Vegas, NV 89108",,702-647-9788,,https://myalignmed.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00510; web-enriched (high)
+,"SALEM, II",JAMES,Injury Rehab and Wellness Center (Dr. Jim Salem),Las Vegas,,NV,"600 S Rancho Dr, #113B, Las Vegas, NV 89106",,702-509-5098,,https://www.injuryrehab.org/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00936; web-enriched (high)
+,SANDNESS JOHNSON,CHEREE,Chiropractic Healing Center,Las Vegas,,NV,"7250 Peak Dr Ste 106, Las Vegas, NV 89128",,702-215-2090,,https://www.chirohealinglv.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00906; web-enriched (high)
 C,SATTERLEE,AMANDA,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01259
 C,SCOTT,ROGER,,North Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02037
 C,SEGHI,SARA L.,,Minden,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01775
-C,SELNICK,RACHEL,,Reno,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01881
-C,SHEA-BRINK,RYANNE,,North Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01713
-C,SHIRAZI,MIR,,North Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01715
+,SELNICK,RACHEL,Empowered Healing Chiropractic,Reno,,NV,"575 Forest St Ste 144, Reno, NV 89509",,775-453-6801,,https://www.empoweredhealingchiropractic.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01881; web-enriched (high)
+C,SHEA-BRINK,RYANNE,,North Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01713; web-enriched (MEDIUM - verify)
+,SHIRAZI,MIR,"Greater Good Chiropractic & Wellness, LLC",North Las Vegas,,NV,"5181 Camino Al Norte #100, North Las Vegas, NV 89031",,702-347-8200,,https://www.greatergoodchiro.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01715; web-enriched (high)
 C,SHORTZ,SAVANNAH,,Portland,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02142
 C,SILVER,JODIE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01742
 C,SILVESTRIZ-LORA,HENRY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02131
-C,"SIM, JR.",TEDDY,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01445
+,"SIM, JR.",TEDDY,ChiropracTED,Las Vegas,,NV,"8560 S Eastern Ave, Ste 150, Las Vegas, NV 89123",,702-277-1371,,https://chiropracted.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01445; web-enriched (high)
 C,SMITH,GREGORY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00601
 C,SMITH,TRISHA,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01607
 C,SORAYA,DAMON,,Los Angeles,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02110
-C,SOTO,RAMON,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01804
-C,SPROULE,RICK,,RENO,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01767
+,SOTO,RAMON,"Ramon Soto, DC",Las Vegas,,NV,"1820 E Sahara Ave Ste 207, Las Vegas, NV 89104",,702-482-9007,,https://www.ramonsotodc.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01804; web-enriched (high)
+,SPROULE,RICK,Active Health Chiropractic,RENO,,NV,"2788 Montego Dr, Reno, NV 89523",,775-393-9362,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01767; web-enriched (high)
 C,ST. JOHN-HEATH,DAVID,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02055
 C,STANLEY,JAMES,,Kailua-Kona,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01952
-C,STEELE,KELSEY,,LAS VEGAS,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01992
+,STEELE,KELSEY,Spinal Care of Nevada,LAS VEGAS,,NV,"1930 Village Center Cir, Suite 11, Las Vegas, NV 89134",,702-566-4673,,https://drdevin.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01992; web-enriched (high)
 C,STORNETTA,STEPHEN,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01470
-C,STOVER,ANNE-MARIE,,Sparks,,NV,,,,,,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only,,,,,,,,,,,NV lic #B01799
+,STOVER,ANNE-MARIE,"Rekindle Chiropractic (Dr. Anne-Marie Rouse, nee Stover)",Sparks,,NV,"870 Steneri Way Ste 103, Sparks, NV 89431",,775-453-0311,,https://www.rekindlechiropractic.com,,,Active,Unknown,,Washoe (Reno/Sparks),,NV Board only + web,,,,,,,,,,,NV lic #B01799; web-enriched (high)
 C,STRATTON,HAILEY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02082
 C,STREHLOW,AMMON,,Saint George,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01773
 C,STRONG,DARREN,,New Waterford,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02058
@@ -844,17 +844,17 @@ C,TAO,CLIFFORD,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV
 C,TAYLOR,JARED,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02021
 C,TCHERNOGOROVA,MARIA-MAGDALENA,,Hendersom,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01964
 C,TICHAWA,LUCAS,,Colorado Springs,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02071
-C,TOOMIANS,VIGEN,,North Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B00650
+,TOOMIANS,VIGEN,Total Care & Wellness,North Las Vegas,,NV,"445 W Craig Rd Ste 112, North Las Vegas, NV 89032",,702-823-3900,,http://www.totalcarelv.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B00650; web-enriched (high)
 C,TRUJILLO,MITCHELL,,Santa Ana,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02092
 C,ULIBARRI,ISAIAH,,SLC,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02111
-C,UX,MELISSA,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01693
+,UX,MELISSA,Spinal Rehabilitation Center (Tenaya),Las Vegas,,NV,"5601 N Tenaya Way Ste 103, Las Vegas, NV 89130",,702-655-2502,,https://spinalrc.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01693; web-enriched (high)
 C,VAN DRIESSCHE,MARC,,MUKILTEO,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02107
-C,VANCLEAVE,MELISSA,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01005
+,VANCLEAVE,MELISSA,The Joint Chiropractic - Henderson Sunset,Henderson,,NV,"1311 W Sunset Rd, Suite 105, Henderson, NV 89014",,702-830-7694,,https://www.thejoint.com/nevada/henderson/henderson-sunset-36006,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01005; web-enriched (high)
 C,VERNER,NICKLAUS,,Winnemucca,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01577
 C,VEVODA,AMY,,Mammoth lakes,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01762
 C,VO,ANDREW-DOUGLAS,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00955
-C,VOGT,JOHN,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01903
-C,VORAN,CHRISTIAN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01913
+,VOGT,JOHN,NuSpine Chiropractic - Tropicana West,Henderson,,NV,"9435 W Tropicana Ave Ste 107, Las Vegas, NV 89147",,702-477-0000,,https://www.nuspine.com/locations/tropicana-west,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01903; web-enriched (high)
+,VORAN,CHRISTIAN,The Neck and Back Clinics - Southwest,Las Vegas,,NV,"8678 W Spring Mountain Rd, Ste 130, Las Vegas, NV 89117",,702-384-0000,,https://theneckandbackclinics.com/,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01913; web-enriched (high)
 C,VRADENBURG,MATTHEW,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01872
 C,WAGENMAN,DEVIN,,Marietta,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02137
 C,WAGNER,WARD,,St George,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00885
@@ -870,9 +870,9 @@ C,WELLS,JOSHUA,,Dallas,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,
 C,WHITTAKER,LOVEROUS,,Houston,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02150
 C,WOOD,ROY,,San Francisco,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B00712
 C,YANG,GARY,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01611
-C,YEUNG,MAN HIN,,Las Vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01803
-C,YOSHIZAKI,SCOTT,,Henderson,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B02073
+,YEUNG,MAN HIN,Perpetual Chiropractic Physicians,Las Vegas,,NV,"3047 S Decatur Blvd, Las Vegas, NV 89102",,702-222-3288,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01803; web-enriched (high)
+,YOSHIZAKI,SCOTT,"RejuveN8: Wellness, Injury, & Nerve",Henderson,,NV,"1010 Wigwam Pkwy Ste 100, Henderson, NV 89074",,725-255-7333,,https://www.rejuven8center.com,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B02073; web-enriched (high)
 C,ZAKUTANSKY,JULIE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01919
-C,ZAUDER,KARL,,las vegas,,NV,,,,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only,,,,,,,,,,,NV lic #B01069
+,ZAUDER,KARL,"Z-Body Fitness, Chiropractic & Fencing (Dr. Karl Zauder)",las vegas,,NV,"5365 N Fort Apache Rd, Las Vegas, NV 89149",,702-308-3776,,,,,Active,Unknown,,Clark (Vegas/Henderson),,NV Board only + web,,,,,,,,,,,NV lic #B01069; web-enriched (high)
 C,ZEBROWITZ,MICHELE,,,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B01935
 C,ZERMENO,FRANK,,Anaheim,,NV,,,,,,,,Active,Unknown,,Other NV,,NV Board only,,,,,,,,,,,NV lic #B02038
